@@ -1,4 +1,4 @@
-# NLW-Next-Level-Week #3
+# NLW-Next-Level-Week #3 - Web
 
 <p align="center">
   <img src="https://raw.githubusercontent.com/shyoutarou/NLW-Next-Level-Week-3/master/.github/demo.gif" alt="NLW Intro" width="650px" />
@@ -19,96 +19,55 @@
 
 ## 📌 Index
 
-- [Sobre o projeto](#-sobre-o-projeto)
-- [Screenshots](#-screenshots)
-- [Techs](#-techs)
-- [Instalação e Start](#-instalação-e-start)
-   - [Clonagem](#clonagem)
-   - [Web](#web)
-   - [Server](#server)
-- [Contribuições](#-contribuições)
-- [License](#-license)
+- [NLW-Next-Level-Week #3 - Web](#nlw-next-level-week-3---web)
+  - [📌 Index](#-index)
+  - [❔ Sobre o projeto](#-sobre-o-projeto)
+  - [🧐 Motivo](#-motivo)
+    - [Desafios](#desafios)
+  - [📸 Screenshots](#-screenshots)
+    - [Web Interface com ReactJS](#web-interface-com-reactjs)
+    - [***Utilitários***](#utilitários)
+    - [🛠 Days e Techs](#-days-e-techs)
+  - [⚙ Instalação e Start](#-instalação-e-start)
+    - [Clonagem](#clonagem)
+    - [Como executar o projeto](#como-executar-o-projeto)
+    - [💻 Executar Projeto Web](#-executar-projeto-web)
+    - [📦 Executar Server API REST](#-executar-server-api-rest)
+    - [📱 Executar Projeto Mobile](#-executar-projeto-mobile)
+  - [🐛 Issues](#-issues)
+  - [🤝 Contribuições](#-contribuições)
+  - [📜 License](#-license)
 
 ## ❔ Sobre o projeto
 
-Durante o evento Next Level Week #3, foi desenvolvido a projeto Happy, que é uma plataforma de visita a orfanatos, conectando pacientes com volutanriado para realizar visitas online, tendo um mapa para vários serviços que acolhem Crianças e Adolescentes com seus horários disponíveis para que os pacientes possam receber visitas de maneira adequada. Trazendo uma representação e homenagem para o dia das crianças, que é comemorado no dia 12 de outubro no Brasil.
-
-O projeto está sendo desenvolvido na [Next Level Week 3](https://nextlevelweek.com/inscricao/3). 
+Durante o evento Next Level Week #3, foi desenvolvido a projeto Happy, que é uma plataforma de visita a orfanatos, conectando pacientes com volutanriado para realizar visitas online, tendo um mapa para vários serviços que acolhem Crianças e Adolescentes com seus horários disponíveis para que os pacientes possam receber visitas de maneira adequada. Trazendo uma representação e homenagem para o dia das crianças, que é comemorado no dia 12 de outubro no Brasil.Este projeto é uma parte de uma trilogia: 
+- [NLW3_Server](https://github.com/shyoutarou/NLW3_Server)
+- [NLW3_Web](https://github.com/shyoutarou/NLW3_Web)
+- [NLW3_Mobile](https://github.com/shyoutarou/NLW3_Mobile)
 
 ## 🧐 Motivo
 
-Desenvolvimento do projeto Next Level Week 3, desenvolvido pela Rocketseat.
+Desenvolvimento apartir do projeto [Next Level Week 3](https://github.com/shyoutarou/NLW-Next-Level-Week-3), visa atender os Desafios lançados no final na semana NLW#3, desenvolvido pela [Rocketseat](https://rocketseat.com.br/).
 
-### Days
+### [Desafios](https://www.notion.so/Vers-o-2-0-do-Happy-c754db7a4d41469e8c2d00fcf75392c4)
 
 <details>
-  <summary>Dia 12/10: Acelerando sua evolução</summary>
+  <summary>The extramile</summary>
 <blockquote>
 
-- Apresentação do projeto
-- Conceitos de back-end, front-end e API
-- O que é React e por que utilizar?
-- Por que vamos usar Typescript?
-- Criando projeto com ReacJS
-- Componentes, JSX e propriedades
-- Trabalhando com rotas
-- Criando a landing page
-- Criando Mapa Page
-</blockquote>
-</details>
-<details>
-  <summary>Dia 13/10: Olhando as oportunidades</summary>
-<blockquote>
+- DeepLink no WhatsApp
+- Exclusão da imagens preview na tela de cadastros
+- Layout da aplicação
+- Acesso restrito
+- Recuperação de senhas
+- Cadastro de orfanatos
+- Splash Screen no React Native com Expo
+- Onboarding do usuário
+- Localização real do usuário
+- Cadastro em múltiplas etapas
+- Logout da aplicação
+- Deploy da aplicação
 
-- Criando projeto com Node.js
-- Rotas parâmetros e métodos HTTP
-- Configurando banco de dados
-- Criando tabelas no banco
-- Criando orfanato sem imagem
-- Abstraindo em controller
-- Listando orfanatos
-- Detalhe do orfanato
-- Upload de imagens
-- Trabalhando com views
-- Lidando com exceções
-- Validação de dados
-</blockquote>
-</details>
-<details>
-  <summary>Dia 14/10: A escolha da stack</summary>
-<blockquote>
-
-- Finalizando página do mapa
-- Abstraindo componentes
-- Conectando Front-End e Back-End
-- Listando orfanatos no mapa
-- Detalhe do orfanato
-- Criação de um orfanato
-</blockquote>
-</details>
-<details>
-  <summary>Dia 15/10: Até 2 anos em 2 meses</summary>
-<blockquote>
-
-- Conceitos de React Native
-- Por que vamos usar Expo
-- Diferenças pro ReactJS
-- Criando tela de mapa
-- Trabalhando com rotas 
-</blockquote>
-</details>
-<details>
-  <summary>Dia 16/10: A milha extra</summary>
-<blockquote>
-
-- Criando fluxo de cadastro de orfanato 
-- Criando componente Header 
-- Adicionando telas faltantes
-- Conectando Front-End e Back-End
-- Detalhe do orfanato
-- Criando orfanato
-- Desafios
-- TabNine
 </blockquote>
 </details>
 
@@ -120,17 +79,9 @@ Desenvolvimento do projeto Next Level Week 3, desenvolvido pela Rocketseat.
   <img src="https://raw.githubusercontent.com/shyoutarou/NLW-Next-Level-Week-3/master/.github/demo_web.gif" alt="Happy Web" width="100%" />
 </p>
 
-### Mobile Interface com React Native
-
-<p align="center">
-  <img src="https://raw.githubusercontent.com/shyoutarou/NLW-Next-Level-Week-3/master/.github/demo_mobile.gif" alt="Happy Mobiel" width="28%" />
-</p>
-
 <h2 align="left"> 📥 Figma layout available for download at: </h2>
 <p align="left">
-  <a title="Ir para Figma Web" alt="Ir para Figma Web" href="https://www.figma.com/file/mDEbnoojksG4w8sOxmudh3/Happy-Web/duplicate">Figma web </a>
-  <br/>
-  <a title="Ir para Figma Mobile" alt="Ir para Figma Mobile" href="https://www.figma.com/file/X27FfVxAgy9f5IFa7ONlph/Happy-Mobile/duplicate?node-id=0%3A1">Figma Mobile</a>
+  <a title="Ir para Figma Web" alt="Ir para Figma Web" href="https://www.figma.com/file/QOzfFwamBenvx2X5K6QyX4/Happy-Web-2.0-(Copy)?node-id=0%3A1">Figma web </a>
 </p>
 
 ### ***Utilitários***
@@ -164,7 +115,7 @@ Para instalar e startar a plataforma Happy, use `npm` ou `yarn`:
 Primeiro, clone o repositório para seu ambiente:
 
 ```bash
-> git clone https://github.com/shyoutarou/NLW-Next-Level-Week-3.git 
+> git clone https://github.com/shyoutarou/NLW3_Web.git 
 ```
 
 Depois, entre no repositório clonado e no diretório correspondente ao que quer testar (web, server).
@@ -236,9 +187,9 @@ Sinta-se à vontade para registrar um novo problema com o respectivo título e d
 
 Siga os passos abaixo para contribuir:
 
-1. Faça o *fork* do projeto (<https://github.com/shyoutarou/NLW-Next-Level-Week-3>)
+1. Faça o *fork* do projeto (<https://github.com/shyoutarou/NLW3_Server.git>)
 
-2. Clone o seu *fork* para sua maquína (`git clone https://github.com/user_name/NLW-Next-Level-Week-3.git`)
+2. Clone o seu *fork* para sua maquína (`git clone https://github.com/user_name/NLW3_Server.git`)
 
 3. Crie uma *branch* para realizar sua modificação (`git checkout -b feature/name_new_feature`)
 

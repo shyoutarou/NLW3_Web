@@ -1,0 +1,28 @@
+import React from 'react';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+
+import Login from '../pages/Login';
+import SignUp from '../pages/SignUp';
+import SignUpSuccess from '../pages/SignUpSuccess';
+import ForgotPassword from '../pages/ForgotPassword';
+import ForgotPasswordSuccess from '../pages/ForgotPasswordSuccess';
+import ResetPassword from '../pages/ResetPassword';
+import ResetPasswordSuccess from '../pages/ResetPasswordSuccess';
+
+const AuthRoutes: React.FC = () => (
+    <BrowserRouter>
+      <Switch>    
+        <Route path="/" exact component={Login} />
+        <Route path="/login" exact component={Login} />
+        <Route path="/signup" component={SignUp}/>
+        <Route path='/signup-success' exact component={SignUpSuccess}  />
+        <Route path="/reset-password/:id/:token" component={ResetPassword} />
+        <Route path="/reset-password-success" exact component={ResetPasswordSuccess} />
+        <Route path="/forgot-password" exact component={ForgotPassword} />
+        <Route path='/forgot-password-success' exact component={ForgotPasswordSuccess} />
+        <Redirect to="/" />
+      </Switch>
+    </BrowserRouter>
+);
+
+export default AuthRoutes;

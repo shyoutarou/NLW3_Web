@@ -7,7 +7,7 @@ import PrimaryButton from "../components/PrimaryButton";
 import '../styles/pages/orphanage.css';
 import Sidebar from "../components/Sidebar";
 import mapIcon from '../utils/mapIcon';
-import whatsappIcon from '../images/whatsapp.svg';
+
 import { useParams } from "react-router-dom";
 import api from "../services/api";
 import { toast } from "react-toastify";
