@@ -1,13 +1,21 @@
-import React from 'react'
-
+import React , { FC } from 'react'
+import SidebarForm from './SidebarForm';
+import Sidebar from './Sidebar';
+import SidebarMap from './SidebarMap';
 import '../styles/components/wrappercontent.css';
 
-const WrapperContent: React.FunctionComponent<{ className?: string }> = ({
-  children,
-  className,
-}) => {
+interface WrapperProps {
+  id: string,
+  className: string,
+  container?: string,
+  logout?: boolean
+}
+
+const WrapperContent: FC<WrapperProps> = ({ children, id, className, container, logout }) => {
   return (
-    <div id="page-content" className={className}>
+    <div id={id} className={className}>
+      {container == 'form'? <SidebarForm />  : container == 'detail'? 
+        <Sidebar logout/>  : <SidebarMap/> }
       {children}
     </div>
   )

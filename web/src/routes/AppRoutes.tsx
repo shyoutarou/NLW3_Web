@@ -8,6 +8,7 @@ import VerifyOrphanage from '../pages/VerifyOrphanage';
 const AppRoutes: React.FC = () => (
     <BrowserRouter  >
       <Switch>
+        <Route path="/" exact component={EditOrphanage} />
         <Route path="/dashboardpending/:id" component={DashboardCreated} />
         <Route path="/dashboardcreated/:id" component={DashboardPending} />
         <Route path="/orphanages/edit/:id" component={EditOrphanage} />

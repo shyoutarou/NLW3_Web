@@ -13,16 +13,18 @@ import OrphanagesMap from '../pages/OrphanagesMap';
 import CreateOrphanage from '../pages/CreateOrphanage';
 import Orphanage from '../pages/Orphanage';
 import Default from '../pages/Default';
+import DeleteSuccess from '../pages/DeleteSuccess';
 
 const AuthRoutes: React.FC = () => (
     <BrowserRouter>
       <Switch>    
         <Route path="/" exact component={Landing} />
-        <Route path="/default" exact component={Default} />
-        <Route path="/login" exact component={Login} />
-        <Route path="/signup" component={SignUp}/>
+        <Route path="/delete-success" exact component={DeleteSuccess} />
+        <Route path="/default" component={Default} />
+        <Route path="/login" component={Login} />
+        <Route path="/signup" exact component={SignUp}/>
         <Route path='/signup-success' exact component={SignUpSuccess}  />
-        <Route path="/reset-password/:id/:token" component={ResetPassword} />
+        <Route path="/reset-password/:id/:token" exact component={ResetPassword} />
         <Route path="/reset-password-success" exact component={ResetPasswordSuccess} />
         <Route path="/forgot-password" exact component={ForgotPassword} />
         <Route path='/forgot-password-success' exact component={ForgotPasswordSuccess} />

@@ -11,6 +11,7 @@ import mapMarkerImg from '../images/map-marker.svg';
 import mapIcon from '../utils/mapIcon';
 import api from '../services/api';
 import { toast } from 'react-toastify';
+import WrapperContent from '../components/WrapperContent';
 
 interface Orphanage {
     id: number;
@@ -39,24 +40,8 @@ function OrphanagesMap() {
     }, []);
 
     return (
-        <div id="page-map">
-            <aside>
-                <header>
-                    <div className="page-map-cont">
-                      <img src={mapMarkerImg} alt="Happy" />
-                      <Link className="button-back" to="/login">
-                        <FiArrowLeft color="#15C3D6" size={24} />
-                      </Link>     
-                    </div>
-                    <h2>Escolha um orfanato no mapa</h2>
-                    <p>Muitas crianças estão esperando a sua visita :)</p>
-                </header>
-                <footer>
-                    <strong>São Paulo</strong>
-                    <span>São Paulo</span>
-                </footer>
-            </aside>
 
+        <WrapperContent id="page-map" className="page-content-left" container="map">
             <Map center={[-23.539417, -46.560972]}
                  zoom={15}
                  style={{ width: '100%', height: '100%' }}>
@@ -87,7 +72,7 @@ function OrphanagesMap() {
             <Link to="/orphanages/create" className="create-orphanage">
                 <FiPlus size={32} color="#FFF" />
             </Link>
-        </div>        
+        </WrapperContent>      
     );
 }
 

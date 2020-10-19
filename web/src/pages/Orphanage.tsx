@@ -5,12 +5,12 @@ import { Map, Marker, TileLayer } from "react-leaflet";
 import PrimaryButton from "../components/PrimaryButton";
 
 import '../styles/pages/orphanage.css';
-import Sidebar from "../components/Sidebar";
 import mapIcon from '../utils/mapIcon';
 
 import { useParams } from "react-router-dom";
 import api from "../services/api";
 import { toast } from "react-toastify";
+import WrapperContent from "../components/WrapperContent";
 
 interface Orphanage {
   latitude: number;
@@ -57,16 +57,14 @@ export default function Orphanage() {
     return <p>Carregando...</p>
   }
 
-  return (
-    <div id="page-orphanage">
-
-      <Sidebar/>
+  return (     
+    <WrapperContent id="page-orphanage" className="page-content-left" container="detail">
       <main>
         <div className="orphanage-details">
-        <img src={orphanage.images[activeImageIndex].url} alt={orphanage.name} />
+        <img src={orphanage.images[activeImageIndex]?.url} alt={orphanage.name} />
 
         <div className="images">
-          {orphanage.images.map((image, index) => (
+          {orphanage.images?.map((image, index) => (
             <button
               key={image.id}
               className={activeImageIndex === index ? 'active' : ''}
@@ -140,6 +138,6 @@ export default function Orphanage() {
           </div>
         </div>
       </main>
-    </div>
+    </WrapperContent>
   );
 }

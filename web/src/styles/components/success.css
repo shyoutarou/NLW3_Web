@@ -1,26 +1,46 @@
-.success-container {
+.success-container, .delete-container {
     min-height: 100vh;
     width: 100vw;
     background: var(--color-primary);
     display: flex;
     justify-content: center;
     align-items: center;
-    flex-direction: column;
+    /* flex-direction: column; */
+    background-color: #3CDC8C;
+}
+
+.success-aside {
+    color: white;
+    font-size: 42;
+    padding: 20px;
+    text-align: center;
+    width: 35vw;
+    margin: 40px;
+    min-width: 50vh;
+}
+
+.delete-container {
+    background-color: #DF6490;
 }
 
 .success-container h1 {
     color: white;
     font-size: 42;
     padding: 20px;
-    font-family: Archivo;
+    font-family: Nunito;
+    font-size: 46px;
 }
 
 .success-container p {
     color: white;
-    font-family: Poppins;
+    font-family: Nunito;
     font-weight: lighter;
     max-width: 600px;
     text-align: center;
+}
+
+.success-container img {
+  width: 30vw;
 }
 
 .success-details {
@@ -28,18 +48,39 @@
     width: 100%;
 }
 
-.success-button {
-    width: 176px;
-    height: 56px;
-    background-color: #04dd61;
+
+.success-button, .delete-button {
+    margin-top: 36px;
+    width: 30vw;
+    height: 64px;
     border: 0;
-    outline: none;
-    border-radius: 8px;
-    color: white;
-    font-family: Poppins;
-    margin-top: 20px;
     cursor: pointer;
-}
+    background: #31B272;
+    border-radius: 20px;
+    color: #FFFFFF;
+    font-weight: 800;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: background-color 0.2s;
+  }
+  
+  .success-button, .delete-button svg {
+    margin-right: 16px;
+  }
+  
+  .delete-button
+  {
+    background-color: #D6487B;
+  }
+
+  .success-button:hover {
+    background: #3BD689;
+  }
+
+  .delete-button:hover {
+    background: #FF669D;
+  }
 
 .z1 {
     z-index: 1;

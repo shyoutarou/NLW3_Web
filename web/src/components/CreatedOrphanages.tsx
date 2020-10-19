@@ -17,9 +17,9 @@ const CreatedOrphanages = () => {
               zoom={15}
               
             >
-              <TileLayer
-                url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
-              />
+            <TileLayer
+              url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
+            />
 
               
             <Marker interactive={false} icon={mapIcon} position={[-27.2092052,-49.6401092]} />

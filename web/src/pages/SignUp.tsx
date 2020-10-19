@@ -1,16 +1,11 @@
 import React, { FormEvent, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
-// import Input from '../../components/Input'
-// import WrapperContent from '../../components/WrapperContent'
-// import LogoContainer from '../../components/LogoContainer'
-
 import backicon from '../images/back.svg';
 import '../styles/pages/signup.css';
 import api from '../services/api'
 import { toast } from 'react-toastify'
 import WrapperContent from '../components/WrapperContent';
-import LogoContainer from '../components/LogoContainer';
 import Input from '../components/Input';
 
 function SignUp() {
@@ -48,12 +43,12 @@ function SignUp() {
 
   return (
     <div id="page-signup">
-      <WrapperContent className="page-content-left">
+      <WrapperContent id="page-content" className="page-content-left" container="form">
 
-        <LogoContainer />
+        
         <div className="signup-container">
           <div className="top-bar-container">
-              <Link to="/">
+              <Link to="/login">
                 <img src={backicon} alt="Voltar" />
               </Link>
           </div>

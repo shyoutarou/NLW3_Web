@@ -2,13 +2,13 @@ import React, { ChangeEvent, FormEvent, useState } from "react"
 import { Map, Marker, TileLayer } from 'react-leaflet'
 import L from 'leaflet'
 
-import { FiArrowLeft, FiPlus, FiX, FiXCircle, FiCheck } from "react-icons/fi"
+import { FiPlus, FiX, FiXCircle, FiCheck } from "react-icons/fi"
 
 import '../styles/pages/create-orphanage.css'
-import Sidebar from "../components/Sidebar"
 import mapIcon from "../utils/mapIcon"
 import api from "../services/api"
 import { useHistory } from "react-router-dom"
+import WrapperContent from "../components/WrapperContent"
 
 export default function VerifyOrphanage() {
 
@@ -77,8 +77,8 @@ export default function VerifyOrphanage() {
   }
 
   return (
-    <div id="page-create-orphanage">
-      <Sidebar />
+    <WrapperContent id="page-create-orphanage" className="page-content-left" 
+      container="detail" logout>
 
       <main>
         <form onSubmit={handleSubmit} className="create-orphanage-form">
@@ -171,8 +171,7 @@ export default function VerifyOrphanage() {
           </div>
         </form>
       </main>
-    </div>
+    </WrapperContent>
   );
 }
 
-// return `https://a.tile.openstreetmap.org/${z}/${x}/${y}.png`;

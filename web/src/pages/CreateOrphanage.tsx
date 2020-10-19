@@ -11,6 +11,7 @@ import Sidebar from "../components/Sidebar";
 import mapIcon from '../utils/mapIcon';
 import api from "../services/api";
 import { toast } from 'react-toastify'
+import WrapperContent from "../components/WrapperContent";
 
 export default function CreateOrphanage() {
 
@@ -87,9 +88,9 @@ export default function CreateOrphanage() {
   }
   
   return (
-    <div id="page-create-orphanage">
-
-      <Sidebar/>
+    <WrapperContent id="page-create-orphanage" 
+        className="page-content-left" 
+        container="detail">
       <main>
         <form onSubmit={handleSubmit}  className="create-orphanage-form">
           <fieldset>
@@ -206,7 +207,7 @@ export default function CreateOrphanage() {
           </button>
         </form>
       </main>
-    </div>
+    </WrapperContent>
   );
 }
 

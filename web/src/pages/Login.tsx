@@ -10,7 +10,6 @@ import { toast } from 'react-toastify'
 import '../styles/pages/login.css'
 import purpleHeartIcon from '../images/purple-heart.svg'
 import WrapperContent from '../components/WrapperContent'
-import LogoContainer from '../components/LogoContainer'
 
 const Login = () => {
 
@@ -61,17 +60,13 @@ const Login = () => {
       }
 
     return (
-        <WrapperContent className="page-content-right">
-           
-            <LogoContainer />
+        <WrapperContent id="page-content" className="page-content-right" container="form">
             <div className="homeform-form">
-
                 <Link className="homeform-back" to="/">
                    <FiArrowLeft color="#15C3D6" size={24} />
                 </Link>                   
 
-                <form className="homeform-form-container"
-                onSubmit={(e) => handleSignIn(e)} >
+                <form className="homeform-form-container" onSubmit={(e) => handleSignIn(e)} >
                     <h2 className="homeform-form-title">
                         Fazer login
                     </h2>

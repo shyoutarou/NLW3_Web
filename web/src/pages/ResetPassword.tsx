@@ -1,10 +1,8 @@
 import React, { useState } from 'react'
-import { FiArrowLeft, FiCheck, FiEye, FiEyeOff } from 'react-icons/fi'
+import { FiArrowLeft, FiEye, FiEyeOff } from 'react-icons/fi'
 
 import '../styles/pages/login.css'
-import logoImg from '../images/map-marker.svg';
 import WrapperContent from '../components/WrapperContent';
-import LogoContainer from '../components/LogoContainer';
 
 const ResetPassword = () => {
 
@@ -20,8 +18,7 @@ const ResetPassword = () => {
     }
 
     return (
-        <WrapperContent className="page-content-left">
-            <LogoContainer />
+        <WrapperContent id="page-content" className="page-content-left" container="form">
             <div className="homeform-form">
                 
                     <div className="homeform-back">

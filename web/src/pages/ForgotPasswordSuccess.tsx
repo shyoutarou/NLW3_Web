@@ -3,7 +3,7 @@ import Success from '../components/Success'
 
 const ForgotPasswordSuccess = () => {
     return (
-        <Success navigate="/" 
+        <Success navigate="/" className="success-container"
         button="Voltar ao login" 
         description="Boa, agora é só checar o e-mail que foi enviado para você redefinir sua senha e aproveitar os estudos." 
         title="Redefinição enviada!" />

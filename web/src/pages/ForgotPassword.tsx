@@ -4,16 +4,14 @@ import { FiArrowLeft } from 'react-icons/fi'
 import '../styles/pages/login.css'
 import { Link } from 'react-router-dom';
 import WrapperContent from '../components/WrapperContent';
-import LogoContainer from '../components/LogoContainer';
 
 const ForgotPassword = () => {
 
     return (
-        <WrapperContent className="page-content-left">
-            <LogoContainer />
+        <WrapperContent id="page-content" className="page-content-left" container="form">
             <div className="homeform-form">
                 
-                <Link className="homeform-back" to="/">
+                <Link className="homeform-back" to="/login">
                    <FiArrowLeft color="#15C3D6" size={24} />
                 </Link>                
 

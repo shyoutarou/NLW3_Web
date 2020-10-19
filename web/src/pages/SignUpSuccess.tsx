@@ -3,10 +3,10 @@ import Success from '../components/Success'
 
 const SignUpSuccess = () => {
     return (
-        <Success navigate="/"
-        button="Fazer login" 
-        description="Agora você faz parte da plataforma da Proffy. Tenha uma ótima experiência.." 
-        title="Cadastro concluído!"  />
+        <Success navigate="/app" className="success-container"
+        button="Voltar para o mapa" 
+        description="O cadastro deu certo e foi enviado ao administrador para ser aprovado. Agora é só esperar:)" 
+        title="Ebaaa!"  />
     )
 }
 

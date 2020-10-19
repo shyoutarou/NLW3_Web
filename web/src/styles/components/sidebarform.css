@@ -1,9 +1,9 @@
-.logocontain-container {
+.sidebarform-container {
     min-height: 100vh;
     display: flex;
 }
 
-.logocontain-banner {
+.sidebarform-banner {
     min-height: 100vh;
     flex: 1;
     background-color: #15C3D6;
@@ -13,16 +13,16 @@
     justify-content: center;
 }
 
-.logocontain-logo {
+.sidebarform-logo {
     font-size: 80px;
 }
 
-.logocontain-city {
+.sidebarform-city {
     margin-top: 20px;
     font-size: 25px;
 }
 
-.logocontain-state {
+.sidebarform-state {
     font-size: 25px;
     font-weight: lighter;
 }
@@ -54,7 +54,7 @@
 }
   
 @media (min-width: 900px) {
-    .logocontain-container {
+    .sidebarform-container {
         grid-area: logo;
     }
 
