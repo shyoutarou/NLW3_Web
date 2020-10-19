@@ -8,8 +8,9 @@ import { useAuth } from '../contexts/auth'
 import { toast } from 'react-toastify'
 
 import '../styles/pages/login.css'
-import logoImg from '../images/map-marker.svg';
 import purpleHeartIcon from '../images/purple-heart.svg'
+import WrapperContent from '../components/WrapperContent'
+import LogoContainer from '../components/LogoContainer'
 
 const Login = () => {
 
@@ -60,19 +61,14 @@ const Login = () => {
       }
 
     return (
-        <div className="homeform-container">
-            <div className="homeform-banner">
-                <img width={110} src={logoImg} alt="logo"/>
-                <h2 className="homeform-logo">happy</h2>
-                <h2 className="homeform-city">Fortaleza</h2>
-                <h2 className="homeform-state">Ceará</h2>
-            </div>
+        <WrapperContent className="page-content-right">
+           
+            <LogoContainer />
             <div className="homeform-form">
-                
-                    <div className="homeform-back">
-                        <FiArrowLeft color="#15C3D6" size={24} />
-                    </div>
-                
+
+                <Link className="homeform-back" to="/">
+                   <FiArrowLeft color="#15C3D6" size={24} />
+                </Link>                   
 
                 <form className="homeform-form-container"
                 onSubmit={(e) => handleSignIn(e)} >
@@ -123,7 +119,7 @@ const Login = () => {
                     </div>                    
                 </form>
             </div>
-        </div>
+        </WrapperContent>
     )
 }
 

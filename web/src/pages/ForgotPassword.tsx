@@ -1,22 +1,16 @@
 import React, { useState } from 'react'
 
-import { FiArrowLeft, FiCheck } from 'react-icons/fi'
+import { FiArrowLeft } from 'react-icons/fi'
 import '../styles/pages/login.css'
-import logoImg from '../images/map-marker.svg';
 import { Link } from 'react-router-dom';
+import WrapperContent from '../components/WrapperContent';
+import LogoContainer from '../components/LogoContainer';
 
 const ForgotPassword = () => {
 
-    const [check, setCheck] = useState(false)
-
     return (
-        <div className="homeform-container">
-            <div className="homeform-banner">
-                <img width={110} src={logoImg} alt="logo"/>
-                <h2 className="homeform-logo">happy</h2>
-                <h2 className="homeform-city">Fortaleza</h2>
-                <h2 className="homeform-state">Ceará</h2>
-            </div>
+        <WrapperContent className="page-content-left">
+            <LogoContainer />
             <div className="homeform-form">
                 
                 <Link className="homeform-back" to="/">
@@ -41,7 +35,7 @@ const ForgotPassword = () => {
                     </button>
                 </form>
             </div>
-        </div>
+        </WrapperContent>
     )
 }
 

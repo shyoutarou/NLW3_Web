@@ -3,6 +3,8 @@ import { FiArrowLeft, FiCheck, FiEye, FiEyeOff } from 'react-icons/fi'
 
 import '../styles/pages/login.css'
 import logoImg from '../images/map-marker.svg';
+import WrapperContent from '../components/WrapperContent';
+import LogoContainer from '../components/LogoContainer';
 
 const ResetPassword = () => {
 
@@ -18,13 +20,8 @@ const ResetPassword = () => {
     }
 
     return (
-        <div className="homeform-container">
-            <div className="homeform-banner">
-                <img width={110} src={logoImg} alt="logo"/>
-                <h2 className="homeform-logo">happy</h2>
-                <h2 className="homeform-city">Fortaleza</h2>
-                <h2 className="homeform-state">Ceará</h2>
-            </div>
+        <WrapperContent className="page-content-left">
+            <LogoContainer />
             <div className="homeform-form">
                 
                     <div className="homeform-back">
@@ -69,7 +66,7 @@ const ResetPassword = () => {
                     </button>
                 </form>
             </div>
-        </div>
+        </WrapperContent>
     )
 }
 

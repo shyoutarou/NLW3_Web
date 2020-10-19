@@ -36,23 +36,21 @@
 }
 
 #page-landing .content-wrapper main p {
+    max-width: 350px;
     margin-top: 40px;
     font-size: 24px;
     line-height: 34px;
 }
 
 .content-wrapper .location {
-    position: absolute;
-    right: 0;
-    top: 0;
-
     font-size: 24px;
     line-height: 34px;
-
     display: flex;
     flex-direction: column;
-
-    text-align: right;
+    text-align: left;
+    position: absolute;
+    top: 0;
+    left: 300px;
 }
 
 .content-wrapper .location strong {
@@ -77,5 +75,26 @@
 }
 
 .content-wrapper .enter-app:hover {
+    background-color: #96FEFF;
+}
+
+
+.restrict-access {
+    width: 222px;
+    height: 56px;
+    background: #12D4E0;
+    position: absolute;
+    top: 0;
+    right: 0;
+    border-radius: 16px;
+    font-size: 16px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+    cursor: pointer;
+}
+
+.restrict-access:hover {
     background-color: #96FEFF;
 }

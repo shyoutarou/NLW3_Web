@@ -9,6 +9,9 @@ import backicon from '../images/back.svg';
 import '../styles/pages/signup.css';
 import api from '../services/api'
 import { toast } from 'react-toastify'
+import WrapperContent from '../components/WrapperContent';
+import LogoContainer from '../components/LogoContainer';
+import Input from '../components/Input';
 
 function SignUp() {
 
@@ -45,7 +48,7 @@ function SignUp() {
 
   return (
     <div id="page-signup">
-      {/* <WrapperContent className="page-content-left">
+      <WrapperContent className="page-content-left">
 
         <LogoContainer />
         <div className="signup-container">
@@ -106,7 +109,7 @@ function SignUp() {
             </fieldset>
           </form>
         </div>
-      </WrapperContent> */}
+      </WrapperContent>
     </div>
   )
 }

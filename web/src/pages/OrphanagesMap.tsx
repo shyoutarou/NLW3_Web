@@ -1,7 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { FiPlus, FiArrowRight } from 'react-icons/fi';
+import { FiPlus, FiArrowRight, FiArrowLeft } from 'react-icons/fi';
 import { Map, TileLayer, Marker, Popup} from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
@@ -42,7 +42,12 @@ function OrphanagesMap() {
         <div id="page-map">
             <aside>
                 <header>
-                    <img src={mapMarkerImg} alt="Happy" />
+                    <div className="page-map-cont">
+                      <img src={mapMarkerImg} alt="Happy" />
+                      <Link className="button-back" to="/login">
+                        <FiArrowLeft color="#15C3D6" size={24} />
+                      </Link>     
+                    </div>
                     <h2>Escolha um orfanato no mapa</h2>
                     <p>Muitas crianças estão esperando a sua visita :)</p>
                 </header>

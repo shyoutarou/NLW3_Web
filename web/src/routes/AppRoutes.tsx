@@ -1,17 +1,17 @@
 import React from 'react';
 import { BrowserRouter, Route, Redirect, Switch } from 'react-router-dom';
-import Landing from '../pages/Landing';
-import OrphanagesMap from '../pages/OrphanagesMap';
-import CreateOrphanage from '../pages/CreateOrphanage';
-import Orphanage from '../pages/Orphanage';
+import DashboardCreated from '../pages/DashboardCreated';
+import DashboardPending from '../pages/DashboardPending';
+import EditOrphanage from '../pages/EditOrphanage';
+import VerifyOrphanage from '../pages/VerifyOrphanage';
 
 const AppRoutes: React.FC = () => (
     <BrowserRouter  >
       <Switch>
-        <Route path="/" exact component={Landing} />
-        <Route path="/app" component={OrphanagesMap} />
-        <Route path="/orphanages/create" component={CreateOrphanage} />
-        <Route path="/orphanages/:id" component={Orphanage} />
+        <Route path="/dashboardpending/:id" component={DashboardCreated} />
+        <Route path="/dashboardcreated/:id" component={DashboardPending} />
+        <Route path="/orphanages/edit/:id" component={EditOrphanage} />
+        <Route path="/orphanages/verify/:id" component={VerifyOrphanage} />
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

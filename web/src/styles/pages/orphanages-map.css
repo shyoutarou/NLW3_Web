@@ -98,3 +98,23 @@
   #page-map .map-popup .leaflet-popup-tip-container {
     display: none;
   }
+
+  
+  #page-map .page-map-cont {
+    display: flex;
+    justify-content: space-between;
+}
+
+  #page-map .button-back {
+
+    background-color: blue;
+    width: 48px;
+    height: 48px;
+    border-radius: 16px;
+    background-color: #ebe2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    align-self: center;
+}
