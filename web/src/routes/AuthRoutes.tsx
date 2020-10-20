@@ -12,15 +12,12 @@ import ResetPasswordSuccess from '../pages/ResetPasswordSuccess';
 import OrphanagesMap from '../pages/OrphanagesMap';
 import CreateOrphanage from '../pages/CreateOrphanage';
 import Orphanage from '../pages/Orphanage';
-import Default from '../pages/Default';
-import DeleteSuccess from '../pages/DeleteSuccess';
+import CreateOrphanageSuccess from '../pages/CreateOrphanageSuccess';
 
 const AuthRoutes: React.FC = () => (
     <BrowserRouter>
       <Switch>    
         <Route path="/" exact component={Landing} />
-        <Route path="/delete-success" exact component={DeleteSuccess} />
-        <Route path="/default" component={Default} />
         <Route path="/login" component={Login} />
         <Route path="/signup" exact component={SignUp}/>
         <Route path='/signup-success' exact component={SignUpSuccess}  />
@@ -30,6 +27,7 @@ const AuthRoutes: React.FC = () => (
         <Route path='/forgot-password-success' exact component={ForgotPasswordSuccess} />
         <Route path="/app" component={OrphanagesMap} />
         <Route path="/orphanages/create" component={CreateOrphanage} />
+        <Route path='/orphanage-success' exact component={CreateOrphanageSuccess}  />
         <Route path="/orphanages/:id" component={Orphanage} />        
         <Redirect to="/" />
       </Switch>

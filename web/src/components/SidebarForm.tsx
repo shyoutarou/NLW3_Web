@@ -22,8 +22,8 @@ const SidebarForm: React.FunctionComponent<{ background?: boolean }> = ({
       <div className="sidebarform-banner">
           <img width={110} src={logoImg} alt="logo"/>
           <h2 className="sidebarform-logo">happy</h2>
-          <h2 className="sidebarform-city">Fortaleza</h2>
-          <h2 className="sidebarform-state">Ceará</h2>
+          <h2 className="sidebarform-city">São Paulo</h2>
+          <h2 className="sidebarform-state">São Paulo</h2>
       </div> 
     </div> 
   )

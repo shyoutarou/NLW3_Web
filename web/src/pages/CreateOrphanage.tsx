@@ -57,33 +57,35 @@ export default function CreateOrphanage() {
 
     const { latitude, longitude } = position;
 
-    try {
-
-      await api.post('orphanages', {name, latitude, longitude, about, whatsapp,
-      instructions, opening_hours, open_on_weekends}).then(response => {
-
-        const { id } = response.data;
-
-        const dataimg =  new FormData();
+    history.push('/orphanage-success');   
     
-        images.forEach(image => {
-          dataimg.append('images', image);
-        });
+    // try {
+
+    //   await api.post('orphanages', {name, latitude, longitude, about, whatsapp,
+    //   instructions, opening_hours, open_on_weekends}).then(response => {
+
+    //     const { id } = response.data;
+
+    //     const dataimg =  new FormData();
+    
+    //     images.forEach(image => {
+    //       dataimg.append('images', image);
+    //     });
     
    
-        api.put(`orphanages/${id}`, dataimg);
+    //     api.put(`orphanages/${id}`, dataimg);
     
-        toast.success(
-          'Cadastro realizado com sucesso!',
-        );
+    //     toast.success(
+    //       'Cadastro realizado com sucesso!',
+    //     );
     
-        history.push('/app');   
+    //     history.push('/app');   
 
-      });
+    //   });
 
-    } catch(e) {
-      toast.error('Ocorreu um erro ao fazer o cadastro');
-    }
+    // } catch(e) {
+    //   toast.error('Ocorreu um erro ao fazer o cadastro');
+    // }
 
   }
   

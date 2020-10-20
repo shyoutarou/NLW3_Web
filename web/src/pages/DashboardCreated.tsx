@@ -9,7 +9,7 @@ const DashboardCreated = () => {
   return (
     <WrapperContent id="page-create-orphanage" 
         className="page-content-left" 
-        container="detail" logout>
+        container="created" logout>
       <div className="dashboard-main">
           <div className="dashboard-title">
               <h2>Orfanatos cadastrados</h2>
