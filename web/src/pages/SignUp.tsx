@@ -1,17 +1,16 @@
 import React, { FormEvent, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
 
-import backicon from '../images/back.svg';
 import '../styles/pages/signup.css';
 import api from '../services/api'
 import { toast } from 'react-toastify'
 import WrapperContent from '../components/WrapperContent';
 import Input from '../components/Input';
+import { FiArrowLeft } from 'react-icons/fi';
 
 function SignUp() {
 
   const [name, setName] = useState<string>('')
-  const [surname, setSurname] = useState<string>('')
   const [email, setEmail] = useState<string>('')
   const [password, setPassword] = useState<string>('')
 
@@ -20,44 +19,42 @@ function SignUp() {
   async function handleCreateUser(e: FormEvent) {
     e.preventDefault()
 
-    history.push('/signup-success')
+    if (isAble()) {
+      try {
+        await api.post('users', {
+          name,
+          email,
+          password
+          })
 
-    // if (isAble()) {
-    //   try {
-    //     await api.post('users', {
-    //       name,
-    //       surname,
-    //       email,
-    //       password
-    //       })
+          console.log(name,
+            email,
+            password)
 
-    //       history.push('/signup-success')
-    //   } catch(e) {
+          history.push('/signup-success')
+      } catch(e) {
 
-    //     toast.error('Ocorreu um erro ao fazer o cadastro');
-    //   }
-    // }
+        toast.error('Ocorreu um erro ao fazer o cadastro');
+      }
+    }
   }
 
   function isAble() {
-    return name !== '' && surname !== '' && email !== '' && password !== ''
+    return name !== '' && email !== '' && password !== ''
   }
 
   return (
-    <div id="page-signup">
       <WrapperContent id="page-content" className="page-content-left" container="form">
 
-        
         <div className="signup-container">
-          <div className="top-bar-container">
-              <Link to="/login">
-                <img src={backicon} alt="Voltar" />
-              </Link>
-          </div>
-          <form
-            className="form-80"
+          <form className="signup-form"
             onSubmit={(event) => handleCreateUser(event)}
           >
+             <div className="top-bar-container">
+                <Link className="homeform-back" to="/login">
+                    <FiArrowLeft color="#15C3D6" size={24} />
+                </Link>   
+            </div>
             <fieldset>
               <legend>
                 <p>Cadastro</p>
@@ -66,25 +63,15 @@ function SignUp() {
               <Input
                 name="name"
                 placeholder="Nome"
-                // type="text"
+                type="text"
 
-                // stacked={true}
                 value={String(name)}
                 onChange={(e) => {setName(e.target.value)}}
-              />
-              <Input
-                name="surname"
-                type="text"
-                placeholder="Sobrenome"
-                // stacked={true}
-                value={String(surname)}
-                onChange={(e) => { setSurname(e.target.value)}}
               />
               <Input
                 name="email"
                 placeholder="E-mail"
                 type="email"
-                // stacked={true}
                 value={String(email)}
                 onChange={(e) => {setEmail(e.target.value)}}
               />
@@ -92,7 +79,6 @@ function SignUp() {
                 name="password"
                 placeholder="Senha"
                 eye="true"
-                // stacked={true}
                 value={String(password)}
                 onChange={(e) => { setPassword(e.target.value)}}
               />
@@ -107,7 +93,6 @@ function SignUp() {
           </form>
         </div>
       </WrapperContent>
-    </div>
   )
 }
 

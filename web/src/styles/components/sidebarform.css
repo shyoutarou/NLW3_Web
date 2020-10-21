@@ -4,67 +4,55 @@
 }
 
 .sidebarform-banner {
-    min-height: 100vh;
-    flex: 1;
-    background-color: #15C3D6;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+    padding: 25px;
+    text-align: center;
+    width: 100%;
+}
+
+.sidebarform-banner img {
+    width: 80px;
 }
 
 .sidebarform-logo {
-    font-size: 80px;
+    font-size: 40px;
 }
 
 .sidebarform-city {
-    margin-top: 20px;
-    font-size: 25px;
+    margin-top: 10px;
+    font-size: 20px;
 }
 
 .sidebarform-state {
-    font-size: 25px;
+    font-size: 20px;
     font-weight: lighter;
 }
 
-.logo-bg-container {
-    position: absolute;
-    width: 100%;
-    height: 100%;
-}
-
-.logo-hero {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-}
-
-.logo-hero img {
-    height: 7rem;
-    z-index: 1;
-}
-
-.logo-hero h2 {
-    width: 14rem;
-    font-weight: 500;
-    font-size: 1.3rem;
-    line-height: 2rem;
-    margin-top: 0.8rem;
-    z-index: 1;
-}
-  
 @media (min-width: 900px) {
-    .sidebarform-container {
-        grid-area: logo;
+
+    .sidebarform-banner {
+        min-height: 100vh;
+        flex: 1;
+        background-color: #15C3D6;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
     }
 
-    .logo-hero h2 {
-        font-size: 3rem !important;
-        line-height: 4rem !important;
-        width: 32rem !important;
+    .sidebarform-logo {
+        font-size: 70px;
     }
 
-    .logo-hero img {
-        height: 14rem !important;
+    .sidebarform-city {
+        font-size: 25px;
+    }
+
+    .sidebarform-state {
+        font-size: 25px;
+        font-weight: lighter;
+    }
+
+    .sidebarform-banner img {
+        width: 110px;
     }
 }

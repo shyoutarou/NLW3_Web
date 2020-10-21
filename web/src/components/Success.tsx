@@ -1,7 +1,4 @@
 import React from 'react'
-
-// import successDetails from '../../assets/images/success-background.svg'
-
 import { useHistory } from 'react-router-dom'
 import '../styles/components/success.css';
 import successIcon from '../images/3CDC8CCreate.svg';
@@ -22,7 +19,6 @@ const Success: React.FC<SuccessProps> = ({ title, description, button, navigate,
     return (
         <div className={className} >
             <div className="success-aside">
-                {/* <img className="success-details" src={successDetails} alt=""/> */}
                 <h1 className="success-title z1">{title}</h1>
                 <p className="success-description z1">{description}</p>
                 <button onClick={() => history.push(navigate)} 

@@ -10,6 +10,7 @@ import { toast } from 'react-toastify'
 import '../styles/pages/login.css'
 import purpleHeartIcon from '../images/purple-heart.svg'
 import WrapperContent from '../components/WrapperContent'
+import Input from '../components/Input'
 
 const Login = () => {
 
@@ -71,23 +72,14 @@ const Login = () => {
                         Fazer login
                     </h2>
 
-                    <div className="homeform-form-input">
-                        <p className="homeform-input-title">E-mail</p>
-                        <input className="homeform-input" 
-                               type="email"
-                               value={String(email)}
-                               onChange={(e) => {setEmail(e.target.value) }}
-                        />
-                    </div>
-
-                    <div className="homeform-form-input">
-                        <p className="homeform-input-title">Senha</p>
-                        <input className="homeform-input" 
-                               type="text"
-                               value={String(password)}
-                               onChange={(e) => { setPassword(e.target.value)}}
-                        />
-                    </div>
+                    <Input name="email" placeholder="E-mail"
+                        type="email" value={String(email)}
+                        onChange={(e) => {setEmail(e.target.value)}}
+                    />
+                    <Input name="password" placeholder="Senha"
+                        eye="true" value={String(password)}
+                        onChange={(e) => { setPassword(e.target.value)}}
+                    />
 
                     <div className="homeform-options">
                         <div className="homeform-option-remember">

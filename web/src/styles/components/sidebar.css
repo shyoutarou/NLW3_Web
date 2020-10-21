@@ -13,6 +13,10 @@ aside.app-sidebar {
     width: 48px;
   }
 
+  aside.app-sidebar footer
+  {
+    margin-bottom: 30px;
+  }
 
   aside.app-sidebar footer a,
   aside.app-sidebar button,

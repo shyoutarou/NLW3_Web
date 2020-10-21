@@ -19,6 +19,7 @@ const Sidebar: FC<SidebarProps> = ({ children, logout, pending }) => {
   const handleLogout = () => {
       localStorage.clear()
       signOut();  
+      push('/login')
   }
 
   const handleCreated = () => {

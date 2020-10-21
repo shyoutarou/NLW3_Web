@@ -1,5 +1,20 @@
-#page-signup .top-bar-container {
-    width: 90%;
+.signup-container {
+    display: flex;
+    background: var(--color-background);
+    padding: 2rem;
+}
+
+.signup-container > form {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.signup-container form fieldset {
+    border: 0;
+}
+
+.signup-container .top-bar-container {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -8,46 +23,42 @@
     padding: 1.6rem 0;
 }
 
-#page-signup .top-bar-container a {
+.signup-container .top-bar-container a {
     height: 3.2rem;
     transition: opacity 0.2s;
 }
 
-#page-signup .top-bar-container a:hover {
+.signup-container .top-bar-container a:hover {
     opacity: 0.6;
 }
 
-.signup-container {
-      width: 100%;
-      background: var(--color-background);
-      /* display: flex; */
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      padding: 2rem;
-      font-family: Poppins;
-      color: var(--color-text-title);
-}
-
-.signup-container > form {
+.signup-container .homeform-back {
+    width: 48px;
+    height: 48px;
+    min-height: 48px;
+    border-radius: 16px;
+    background-color: #ebe2f5;
     display: flex;
-    align-items: center;
-    height: 100%;
     justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    align-self: flex-end;
 }
 
-.signup-container form fieldset {
-    border: 0;
-    width: 80%;
+.signup-container form fieldset legend a {
+    display: none;
 }
 
 .signup-container form fieldset legend p {
     color: var(--color-text-title);
-    font: 700 3.2rem Poppins;
+    font: 700 3.2rem Nunito;
 }
 
 .signup-container form fieldset legend + span {
-    font-size: 1.2rem;
+    color: var(--color-text-title);
+    margin-top: 10px;
+    margin-bottom: 10px;
+    display: flex
 }
 
 .signup-submit,
@@ -65,6 +76,7 @@
     transition: 0.2s;
     border-radius: 0.8rem;
     cursor: not-allowed;
+    margin-top: 10px;
 }
 
 .signup-submit-active {
@@ -78,10 +90,25 @@
     color: var(--color-button-text);
 }
 
+
 @media (min-width: 900px) {
 
-    .signup-container form fieldset legend a {
-        display: none;
+    .signup-container > form {
+        min-height: 100vh;
+        flex: 1 1;
+        background: var(--color-background);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .signup-container form fieldset {
+        width: 65%;
+    }
+
+    .signup-container .top-bar-container {
+        width: 90%;
     }
 }
   

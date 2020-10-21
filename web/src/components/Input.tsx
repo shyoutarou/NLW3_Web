@@ -14,14 +14,14 @@ const Input: React.FC<InputProps> = ({eye, label, name, ...rest}) =>
     const [visible, setVisible] = useState(false)
 
     return (
-        <div className="input-block">
+        <div id="input-block">
             <label htmlFor={name}>{label}</label>
             <input type={ visible || !eye ? "text" : "password"}
                    {...rest} id={name}></input>
             {eye? 
             <div onClick={() => {setVisible(!visible)}} className="eye">
-                {visible ? <FiEye color="#8257e5" size={20} /> :
-                <FiEyeOff color="#8257e5" size={20} />}
+                {visible ? <FiEye color="#0D96A6" size={20} /> :
+                <FiEyeOff color="#0D96A6" size={20} />}
             </div>
             : null}
         </div>

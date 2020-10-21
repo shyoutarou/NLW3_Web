@@ -163,3 +163,80 @@ form.create-orphanage-form button.confirm-button svg {
 form.create-orphanage-form button.confirm-button:hover {
   background: #36CF82;
 }
+
+
+.close {
+  width: 30px;
+  height: 30px;
+  background-color: white;
+  border-top-right-radius: 20px;
+  border-bottom-left-radius: 10px;
+  position: absolute;
+  top: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+}
+
+.img-container {
+  position: relative;
+}
+
+.verify-orphanage-buttons {
+  display: flex;
+  justify-content: space-between;
+}
+
+form.create-orphanage-form button.verify-confirm-button {
+  margin-top: 64px;
+  width: 48%;
+  height: 64px;
+  border: 0;
+  cursor: pointer;
+  background: #3CDC8C;
+  border-radius: 20px;
+  color: #FFFFFF;
+  font-weight: 800;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: background-color 0.2s;
+}
+
+form.create-orphanage-form button.verify-confirm-button svg {
+  margin-right: 16px;
+}
+
+form.create-orphanage-form button.verify-deny-button:hover {
+  background: #FF669D;
+}
+
+form.create-orphanage-form button.verify-deny-button {
+  margin-top: 64px;
+  width: 48%;
+  height: 64px;
+  border: 0;
+  cursor: pointer;
+  background: #FF669D;
+  border-radius: 20px;
+  color: #FFFFFF;
+  font-weight: 800;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  transition: background-color 0.2s;
+}
+
+form.create-orphanage-form button.verify-deny-button svg {
+  margin-right: 16px;
+}
+
+form.create-orphanage-form button.verify-deny-button:hover {
+  background: #FF559D;
+}

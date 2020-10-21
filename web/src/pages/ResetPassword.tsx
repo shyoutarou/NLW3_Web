@@ -3,9 +3,15 @@ import { FiArrowLeft, FiEye, FiEyeOff } from 'react-icons/fi'
 
 import '../styles/pages/login.css'
 import WrapperContent from '../components/WrapperContent';
+import { Link, useHistory } from 'react-router-dom';
+import Input from '../components/Input';
 
 const ResetPassword = () => {
 
+    const [password, setPassword] = useState<string>('123')
+    const [newpassword, setNewpassword] = useState<string>('123')
+
+    const { push } = useHistory()
     const [eyePassword, setEyePassword] = useState(false)
     const [eyeConfirmPassword, setEyeConfirmPassword] = useState(false)
 
@@ -17,14 +23,19 @@ const ResetPassword = () => {
         setEyeConfirmPassword(!eyeConfirmPassword)
     }
 
+    const handleResetSucess = () => {
+        push('/reset-password-success')
+    }
+  
     return (
         <WrapperContent id="page-content" className="page-content-left" container="form">
             <div className="homeform-form">
-                
-                    <div className="homeform-back">
+
+                <div className="top-bar-container">
+                    <Link className="homeform-back" to="/login">
                         <FiArrowLeft color="#15C3D6" size={24} />
-                    </div>
-                
+                    </Link>   
+                </div>
 
                 <form className="homeform-form-container">
                     <h2 className="homeform-form-title">
@@ -33,32 +44,30 @@ const ResetPassword = () => {
 
                     <p className="homeform-description">Escolha uma nova senha para você acessar o dashboard do Happy.</p>
 
+
                     <div className="homeform-form-input">
-                        <p className="homeform-input-title">Nova senha</p>
-                        <input className="homeform-input" type={eyePassword ? "text" : "password"}/>
-                        {eyePassword ? (
-                            <FiEye onClick={handleEyePassword}
-                            className="homeform-eye" size={20} color="#15C3D6"/>
-                        ) : (
-                            <FiEyeOff onClick={handleEyePassword}
-                            className="homeform-eye" size={20} color="#15C3D6"/>
-                        )}
+                        <Input
+                            name="password"
+                            placeholder="Nova senha"
+                            eye="true"
+                            value={String(password)}
+                            onChange={(e) => { setPassword(e.target.value)}}
+                        />
                     </div>
 
                     <div className="homeform-form-input">
-                        <p className="homeform-input-title">Repetir senha</p>
-                        <input className="homeform-input" type={eyeConfirmPassword ? "text" : "password"}/>
-                        {eyeConfirmPassword ? (
-                            <FiEye onClick={handleEyeConfirmPassword}
-                            className="homeform-eye" size={20} color="#15C3D6"/>
-                        ) : (
-                            <FiEyeOff onClick={handleEyeConfirmPassword}
-                            className="homeform-eye" size={20} color="#15C3D6"/>
-                        )}
+                        <Input
+                            name="password"
+                            placeholder="Repetir senha"
+                            eye="true"
+                            value={String(newpassword)}
+                            onChange={(e) => { setNewpassword(e.target.value)}}
+                        />
                     </div>
 
 
-                    <button className="homeform-button">
+                    <button className="homeform-button"
+                        onClick={handleResetSucess}>
                         <p>Redefinir senha</p>
                     </button>
                 </form>

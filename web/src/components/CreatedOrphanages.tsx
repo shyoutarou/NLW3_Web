@@ -12,7 +12,7 @@ interface CreatedProps {
 
 const CreatedOrphanages: FC<CreatedProps> = ({ pending }) => {
 
-  const { push, goBack } = useHistory()
+  const { push } = useHistory()
   
   const handleEdit = () => {
     pending? push('/orphanages/verify/1') : push('/orphanages/edit/1')

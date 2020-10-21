@@ -27,7 +27,7 @@
     border-bottom-right-radius: 16px;
     display: flex;
     align-items: center;
-    padding: 20px;
+    /* padding: 20px; */
     color: #4D6F80;
     justify-content: space-between;
 }
@@ -46,4 +46,8 @@
     display: flex;
     justify-content: center;
     align-items: center;
+}
+
+.created-orphanage-name {
+    padding-left: 22px;
 }
