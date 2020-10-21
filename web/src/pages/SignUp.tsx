@@ -1,12 +1,12 @@
 import React, { FormEvent, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-
-import '../styles/pages/signup.css';
 import api from '../services/api'
 import { toast } from 'react-toastify'
 import WrapperContent from '../components/WrapperContent';
 import Input from '../components/Input';
 import { FiArrowLeft } from 'react-icons/fi';
+
+import '../styles/pages/signup.css';
 
 function SignUp() {
 
@@ -51,7 +51,7 @@ function SignUp() {
             onSubmit={(event) => handleCreateUser(event)}
           >
              <div className="top-bar-container">
-                <Link className="homeform-back" to="/login">
+                <Link className="signup-back" to="/login">
                     <FiArrowLeft color="#15C3D6" size={24} />
                 </Link>   
             </div>

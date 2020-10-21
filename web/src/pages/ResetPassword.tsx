@@ -1,78 +1,91 @@
-import React, { useState } from 'react'
-import { FiArrowLeft, FiEye, FiEyeOff } from 'react-icons/fi'
-
-import '../styles/pages/login.css'
+import React, { FormEvent, useState } from 'react'
+import { Link, useHistory, useParams } from 'react-router-dom';
+import api from '../services/api'
+import { toast } from 'react-toastify'
 import WrapperContent from '../components/WrapperContent';
-import { Link, useHistory } from 'react-router-dom';
 import Input from '../components/Input';
+import { FiArrowLeft } from 'react-icons/fi'
 
-const ResetPassword = () => {
+import '../styles/pages/resetpassword.css'
+
+function ResetPassword() {
 
     const [password, setPassword] = useState<string>('123')
-    const [newpassword, setNewpassword] = useState<string>('123')
+    const [confirmPassword, setConfirmPassword] = useState<string>('123')
+  
+    const history = useHistory();
+    // const { id, token } = useParams();
 
-    const { push } = useHistory()
-    const [eyePassword, setEyePassword] = useState(false)
-    const [eyeConfirmPassword, setEyeConfirmPassword] = useState(false)
-
-    const handleEyePassword = () => {
-        setEyePassword(!eyePassword)
-    }
-
-    const handleEyeConfirmPassword = () => {
-        setEyeConfirmPassword(!eyeConfirmPassword)
-    }
-
-    const handleResetSucess = () => {
-        push('/reset-password-success')
+    function handleResetSucess(e: FormEvent) {
+        e.preventDefault();
+    
+        try {
+            if (isAble() && password === confirmPassword) {
+        
+                history.push('/reset-password-success')
+                
+                // api.post(`resetPassword/${id}`, {
+                //   password,
+                //   token,
+                // }).then(() => {
+                    
+                //       history.push('/reset-password-success')
+                // }).catch((error) =>{
+                //     toast.error('Ocorreu um erro ao fazer a alteração');
+                // })
+            } else {
+            toast.error("Suas senhas não batem.")
+            }
+        } catch (err) {
+            toast.error('Ocorreu um erro ao recuperar senha');
+        }              
     }
   
+    function isAble() {
+        return password !== '' && confirmPassword !== '' 
+    }
+
     return (
         <WrapperContent id="page-content" className="page-content-left" container="form">
-            <div className="homeform-form">
-
+         <div className="resetpassword-container">
+            <form className="resetpassword-form"
+                 onSubmit={(event) => handleResetSucess(event)}
+            >
                 <div className="top-bar-container">
-                    <Link className="homeform-back" to="/login">
+                    <Link className="resetpassword-back" to="/login">
                         <FiArrowLeft color="#15C3D6" size={24} />
                     </Link>   
                 </div>
-
-                <form className="homeform-form-container">
-                    <h2 className="homeform-form-title">
-                        Redefinição de senha
-                    </h2>
-
-                    <p className="homeform-description">Escolha uma nova senha para você acessar o dashboard do Happy.</p>
-
-
-                    <div className="homeform-form-input">
-                        <Input
-                            name="password"
-                            placeholder="Nova senha"
-                            eye="true"
-                            value={String(password)}
-                            onChange={(e) => { setPassword(e.target.value)}}
-                        />
-                    </div>
-
-                    <div className="homeform-form-input">
-                        <Input
-                            name="password"
-                            placeholder="Repetir senha"
-                            eye="true"
-                            value={String(newpassword)}
-                            onChange={(e) => { setNewpassword(e.target.value)}}
-                        />
-                    </div>
-
-
-                    <button className="homeform-button"
-                        onClick={handleResetSucess}>
-                        <p>Redefinir senha</p>
+                <fieldset>
+                    <legend>
+                        <p>Redefinição de senha</p>
+                    </legend>
+                    <span>Escolha uma nova senha para você acessar o dashboard do Happy.</span>
+                    <Input
+                        name="password"
+                        placeholder="Nova senha"
+                        eye="true"
+                        value={String(password)}
+                        onChange={(e) => { setPassword(e.target.value)}}
+                    />
+                    <Input
+                        name="password"
+                        placeholder="Repetir senha"
+                        eye="true"
+                        value={String(confirmPassword)}
+                        onChange={(e) => { setConfirmPassword(e.target.value)}}
+                    />
+                    <button
+                        className={`resetpassword-submit ${isAble() && 'resetpassword-submit-active'}`}
+                        disabled={!isAble()}
+                        type="submit"
+                    >
+                        Redefinir senha
                     </button>
-                </form>
-            </div>
-        </WrapperContent>
+                </fieldset>                    
+            </form>
+        </div>
+      </WrapperContent>            
     )
 }
 

@@ -1,36 +1,59 @@
-import React, { useState } from 'react'
-
-import { FiArrowLeft } from 'react-icons/fi'
-import '../styles/pages/login.css'
-import { Link, useHistory } from 'react-router-dom';
+import React, { FormEvent, useState } from 'react'
+import { Link, useHistory } from 'react-router-dom'
+import api from '../services/api'
+import { toast } from 'react-toastify'
 import WrapperContent from '../components/WrapperContent';
 import Input from '../components/Input';
+import { FiArrowLeft } from 'react-icons/fi'
+
+import '../styles/pages/forgotpassword.css'
 
 const ForgotPassword = () => {
 
     const [email, setEmail] = useState<string>('ric@shik.com')
-    const { push } = useHistory()
 
-    const handleReset = () => {
-        push('/forgot-password-success')
-    }
-  
+    const history = useHistory();
+
+    const handleReset = async (e: FormEvent) => {
+        e.preventDefault()
+    
+        try {
+        history.push('/forgot-password-success')
+
+        // try {
+        //     await api.post('/forgotPassword', {
+        //         email
+        //     })
+    
+        //     history.push('/forgot-password-success')
+        // } catch(e) {
+        //   toast.error('Email inexistente!');
+        // }
+        } catch (err) {
+            toast.error('Ocorreu um erro ao recuperar senha');
+        }        
+      }
+
+      function isAble() {
+        return email !== '' 
+      }
+
     return (
         <WrapperContent id="page-content" className="page-content-left" container="form">
-            <div className="homeform-form">
-
+        <div className="forgotpassword-container">           
+            <form className="forgotpassword-form"
+                   onSubmit={(event) => handleReset(event)}
+            >
                 <div className="top-bar-container">
-                    <Link className="homeform-back" to="/login">
+                    <Link className="forgotpassword-back" to="/login">
                         <FiArrowLeft color="#15C3D6" size={24} />
                     </Link>   
                 </div>
-                <form className="homeform-form-container">
-                    <h2 className="homeform-form-title">
-                        Esqueci minha senha
-                    </h2>
-
-                    <p className="homeform-description">Sua redefinição de senha será enviada para o e-mail cadastrado.</p>
-
+                <fieldset>
+                    <legend>
+                        <p>Esqueci minha senha</p>  
+                    </legend>
+                    <span>Sua redefinição de senha será enviada para o e-mail cadastrado.</span>
                     <Input
                         name="email"
                         placeholder="E-mail"
@@ -38,14 +61,16 @@ const ForgotPassword = () => {
                         value={String(email)}
                         onChange={(e) => {setEmail(e.target.value)}}
                     />
-
-
-                    <button className="homeform-button"
-                        onClick={handleReset}>
-                        <p>Enviar email de redefinição</p>
+                    <button
+                        className={`forgotpassword-submit ${isAble() && 'forgotpassword-submit-active'}`}
+                        disabled={!isAble()}
+                        type="submit"
+                    >
+                        Enviar email de redefinição
                     </button>
-                </form>
-            </div>
+                </fieldset>                    
+            </form>
+        </div> 
         </WrapperContent>
     )
 }

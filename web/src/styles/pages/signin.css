@@ -1,0 +1,218 @@
+.homeform-container {
+    min-height: 100vh;
+    display: flex;
+}
+
+.homeform-banner {
+    min-height: 100vh;
+    flex: 1;
+    background-color: #15C3D6;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.homeform-form {
+    min-height: 100vh;
+    width: 550px;
+    padding: 30px 30px 60px 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 0;
+}
+
+.homeform-form .top-bar-container {
+    width: 90%;
+    margin: 0 auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    color: var(--color-text-int-primary);
+    padding: 1.6rem 0;
+}
+
+.homeform-form .top-bar-container a {
+    height: 3.2rem;
+    transition: opacity 0.2s;
+}
+
+.homeform-form .top-bar-container a:hover {
+    opacity: 0.6;
+}
+
+
+.homeform-logo {
+    font-size: 80px;
+}
+
+.homeform-city {
+    margin-top: 20px;
+    font-size: 25px;
+}
+
+.homeform-state {
+    font-size: 25px;
+    font-weight: lighter;
+}
+
+.homeform-back {
+    width: 48px;
+    height: 48px;
+    min-height: 48px;
+    border-radius: 16px;
+    background-color: #ebe2f5;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    align-self: flex-end;
+}
+
+.homeform-form-container {
+    background-color: pink;
+    min-height: 70vh;
+    width: 400px;
+}
+
+.homeform-form-title {
+    font-size: 32px;
+    color: #5C8599;
+    margin-bottom: 20px;
+}
+
+.homeform-input-title {
+    font-size: 16px;
+    color: #5C8599;
+}
+
+.homeform-input {
+    background-color: #F5F8FA;
+    width: 30vw;
+    height: 20vh;
+    border-radius: 16px;
+    border: 1px solid #D3E2E5;
+    outline: none;
+    margin-top: 10px;
+    margin-bottom: 30px;
+    padding-left: 20px;
+    color: #5C8599;
+}
+
+.homeform-options {
+    display: flex;
+    justify-content: space-between;
+}
+
+.homeform-option-remember {
+    display: flex;
+    align-items: center;
+}
+
+.homeform-options a{
+    color: var(--color-primary-dark);
+    font-weight: 700;
+}
+
+.homeform-option-remember p {
+    color: #8FA7B2;
+    margin-left: 10px;
+}
+
+.homeform-forgot {
+    color: #8FA7B2;
+}
+
+.homeform-button {
+    background-color: #37C77F;
+    width: 360px;
+    min-height: 11vh;
+    height: 64px;
+    border-radius: 16px;
+    border: 0;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-top: 20px;
+    cursor: pointer;
+}
+
+.homeform-checkbox {
+    background-color: white;
+    border-radius: 8px;
+    width: 24px;
+    height: 24px;
+    border: 1px solid #ccc;
+    transition: 0.5s;
+}
+
+.homeform-checkbox-active {
+    background-color: #37C77F;
+    width: 24px;
+    height: 24px;
+    border-radius: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transition: 0.5s;
+}
+
+.homeform-description {
+    color: #5C8599;
+    margin-bottom: 20px;
+}
+
+.homeform-eye {
+    position: absolute;
+    bottom: 52px;
+    right: 20px;
+    cursor: pointer;
+}
+
+.homeform-form-input {
+    position: relative;
+}
+
+.login-footer{
+    display: none;
+}
+
+.login-footer .signup{
+    font-family: Nunito;
+    font-size: 1.8rem;
+}
+
+.login-footer .signup p{
+    color: var(--color-text-complement);
+    font-weight: 400;
+}
+
+.login-footer .signup a{
+    color: var(--color-primary-dark);
+    font-weight: 700;
+}
+
+.login-footer span{
+    font: 400 1.8rem Nunito;
+    color: var(--color-text-complement);
+}
+
+@media (min-width: 900px) {
+
+    .login-footer {
+        margin-top: 2rem;
+        display: flex !important;
+        justify-content: space-between;
+        width: 100%;
+    }
+}
+
+
+
+
+
+
+
+

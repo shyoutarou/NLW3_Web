@@ -1,30 +1,20 @@
-.homeform-container {
-    min-height: 100vh;
+.login-container {
     display: flex;
+    background: var(--color-background);
+    padding: 2rem;
 }
 
-.homeform-banner {
-    min-height: 100vh;
-    flex: 1;
-    background-color: #15C3D6;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
+.login-container > form {
+    display: block;
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.homeform-form {
-    min-height: 100vh;
-    width: 550px;
-    padding: 30px 30px 60px 60px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin: 0;
+.login-container form fieldset {
+    border: 0;
 }
 
-.homeform-form .top-bar-container {
-    width: 90%;
+.login-container .top-bar-container {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -33,31 +23,16 @@
     padding: 1.6rem 0;
 }
 
-.homeform-form .top-bar-container a {
+.login-container .top-bar-container a {
     height: 3.2rem;
     transition: opacity 0.2s;
 }
 
-.homeform-form .top-bar-container a:hover {
+.login-container .top-bar-container a:hover {
     opacity: 0.6;
 }
 
-
-.homeform-logo {
-    font-size: 80px;
-}
-
-.homeform-city {
-    margin-top: 20px;
-    font-size: 25px;
-}
-
-.homeform-state {
-    font-size: 25px;
-    font-weight: lighter;
-}
-
-.homeform-back {
+.login-back {
     width: 48px;
     height: 48px;
     min-height: 48px;
@@ -68,78 +43,77 @@
     align-items: center;
     cursor: pointer;
     align-self: flex-end;
+    margin-left: auto;
 }
 
-.homeform-form-container {
-    background-color: pink;
-    min-height: 70vh;
-    width: 400px;
+.login-container form fieldset legend a {
+    display: none;
 }
 
-.homeform-form-title {
-    font-size: 32px;
-    color: #5C8599;
-    margin-bottom: 20px;
+.login-container form fieldset legend p {
+    color: var(--color-text-title);
+    font: 700 3.2rem Nunito;
 }
 
-.homeform-input-title {
-    font-size: 16px;
-    color: #5C8599;
-}
-
-.homeform-input {
-    background-color: #F5F8FA;
-    width: 30vw;
-    height: 20vh;
-    border-radius: 16px;
-    border: 1px solid #D3E2E5;
-    outline: none;
+.login-container form fieldset legend + span {
+    color: var(--color-text-title);
     margin-top: 10px;
-    margin-bottom: 30px;
-    padding-left: 20px;
-    color: #5C8599;
+    margin-bottom: 10px;
+    display: flex
 }
 
-.homeform-options {
+.login-submit,
+.login-submit-active {
+    flex: 1;
+    display: flex;
+    width: 100%;
+    padding: 1.6rem 0;
+    justify-content: center;
+    align-items: center;
+    background: var(--color-line-in-white);
+    color: var(--color-text-complement);
+    border: 0;
+    outline: 0;
+    transition: 0.2s;
+    border-radius: 0.8rem;
+    cursor: not-allowed;
+    margin-top: 10px;
+}
+
+.login-submit-active {
+    background: var(--color-secondary);
+    color: var(--color-button-text);
+    cursor: pointer;
+}
+
+.login-submit-active:hover {
+    background: var(--color-secondary-dark);
+    color: var(--color-button-text);
+}
+
+
+.login-options {
     display: flex;
     justify-content: space-between;
+    margin-bottom: 25px;
 }
 
-.homeform-option-remember {
+.login-option-remember {
     display: flex;
     align-items: center;
 }
 
-.homeform-options a{
+.login-options a{
     color: var(--color-primary-dark);
     font-weight: 700;
 }
 
-.homeform-option-remember p {
+.login-option-remember p {
     color: #8FA7B2;
     margin-left: 10px;
 }
 
-.homeform-forgot {
-    color: #8FA7B2;
-}
-
-.homeform-button {
-    background-color: #37C77F;
-    width: 360px;
-    min-height: 11vh;
-    height: 64px;
-    border-radius: 16px;
-    border: 0;
-    color: white;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-top: 20px;
-    cursor: pointer;
-}
-
-.homeform-checkbox {
+.login-checkbox {
     background-color: white;
     border-radius: 8px;
     width: 24px;
@@ -148,7 +122,7 @@
     transition: 0.5s;
 }
 
-.homeform-checkbox-active {
+.login-checkbox-active {
     background-color: #37C77F;
     width: 24px;
     height: 24px;
@@ -157,22 +131,6 @@
     justify-content: center;
     align-items: center;
     transition: 0.5s;
-}
-
-.homeform-description {
-    color: #5C8599;
-    margin-bottom: 20px;
-}
-
-.homeform-eye {
-    position: absolute;
-    bottom: 52px;
-    right: 20px;
-    cursor: pointer;
-}
-
-.homeform-form-input {
-    position: relative;
 }
 
 .login-footer{
@@ -185,7 +143,7 @@
 }
 
 .login-footer .signup p{
-    color: var(--color-text-complement);
+    color: var(--color-primary-darker);
     font-weight: 400;
 }
 
@@ -199,8 +157,28 @@
     color: var(--color-text-complement);
 }
 
+
 @media (min-width: 900px) {
 
+    .login-container > form {
+        min-height: 100vh;
+        flex: 1 1;
+        background: var(--color-background);
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+    }
+    
+    .login-container form fieldset {
+        width: 65%;
+    }
+
+    .login-container .top-bar-container {
+        width: 90%;
+    }
+
+    
     .login-footer {
         margin-top: 2rem;
         display: flex !important;
@@ -208,11 +186,4 @@
         width: 100%;
     }
 }
-
-
-
-
-
-
-
-
+  
