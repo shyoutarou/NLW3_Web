@@ -57,16 +57,15 @@ export default function EditOrphanage() {
     }
   }
 
-  const handleSelectImages = (e: ChangeEvent<HTMLInputElement>) => {
-    if(!e.target.files) {
-      return
-    }
-    const selectedImages = Array.from(e.target.files)
-    setImages(selectedImages)
-    const selectedImagesPreview = selectedImages.map(img => {
-      return URL.createObjectURL(img)
-    })
-    setPreviewImages(selectedImagesPreview)
+    
+  function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
+    if (!event.target.files) return; 
+    const selectedImages = Array.from(event.target.files)
+    setImages(selectedImages);
+    selectedImages.map(image => {
+      const imageurl =  URL.createObjectURL(image)
+      setPreviewImages(previewImages => ([...previewImages, imageurl]))
+    });
   }
 
   const removeImage = (removeIndex: number) => {
@@ -78,7 +77,7 @@ export default function EditOrphanage() {
 
   return (
     <WrapperContent id="page-create-orphanage" className="page-content-left" 
-      container="detail" logout>
+      container="detail">
       <main>
         <form onSubmit={handleSubmit} className="create-orphanage-form">
           <fieldset>

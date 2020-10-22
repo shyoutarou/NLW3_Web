@@ -78,7 +78,7 @@ export default function VerifyOrphanage() {
 
   return (
     <WrapperContent id="page-create-orphanage" className="page-content-left" 
-      container="verify" logout>
+      container="verify">
 
       <main>
         <form onSubmit={handleSubmit} className="create-orphanage-form">

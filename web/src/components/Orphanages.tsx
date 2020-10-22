@@ -7,15 +7,20 @@ import '../styles/components/created-orphanage.css'
 import mapIcon from '../utils/mapIcon'
 
 interface CreatedProps {
-  pending?: boolean
+  permission?: boolean
+  id: number
+  name: string
+  latitude: number
+  longitude: number
 }
 
-const CreatedOrphanages: FC<CreatedProps> = ({ pending }) => {
+const Orphanages: FC<CreatedProps> = ({ permission, id, latitude, longitude, name }) => {
 
   const { push } = useHistory()
-  
+
   const handleEdit = () => {
-    pending? push('/orphanages/verify/1') : push('/orphanages/edit/1')
+    console.log(permission)
+    permission? push(`/orphanages/verify/${id}`) : push(`/orphanages/edit/${id}`)
   }
 
   const handleDelete = () => {
@@ -24,41 +29,43 @@ const CreatedOrphanages: FC<CreatedProps> = ({ pending }) => {
   
   return (
       <div className="created-orphanage-container">
-          <Map
-            center={[-27.2092052,-49.6401092]} 
-            style={{
-                width: '100%',
-                height: 227,
-                borderRadius: 16
-            }}
-            zoom={15}
-            
-          >
-          <TileLayer
-            url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'
-          />
-
-            
-          <Marker interactive={false} icon={mapIcon} position={[-27.2092052,-49.6401092]} />
-            
+          <Map  center={[latitude, longitude]} 
+            style={{ width: '100%', height: 227, borderRadius: 16 }}
+            zoom={15} >
+          <TileLayer url='https://a.tile.openstreetmap.org/{z}/{x}/{y}.png'/>
+          <Marker interactive={false} icon={mapIcon} position={[latitude, longitude]} />
           </Map>
           <div className="created-orphanage-options">
             <div className="created-orphanage-name">
-              <h2>Lar das meninas</h2>
+              <h2>{name}</h2>
             </div>
             <div className="created-orphanage-buttons">
               <button type="button" className="created-orphanage-button"
-                  onClick={handleEdit}>
-                  <FiEdit3 size={20} color="#4D6F80" />
+                      onClick={handleEdit}>
+                 <FiEdit3 size={20} color="#4D6F80" />
               </button>
+              {permission &&
               <button type="button" className="created-orphanage-button"
-                  onClick={handleDelete}>
-                  <FiTrash size={20} color="#4D6F80" />
-              </button>              
+                      onClick={handleDelete}>
+                <FiTrash size={20} color="#4D6F80" />
+              </button>  }
             </div>
           </div>
       </div>
   )
 }
 
-export default CreatedOrphanages
+export default Orphanages
+
+
+
+
+
+
+
+
+
+
+
+
+

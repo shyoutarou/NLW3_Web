@@ -21,11 +21,13 @@ function Landing() {
                     <strong>São Paulo</strong>
                     <span>São Paulo</span>
                 </div>
-                <div onClick={() => push('/login')}
-                className="restrict-access">Acesso restrito</div>
+
+                <Link to="/login" className="restrict-access" >
+                    Acesso restrito
+                </Link>
 
                 <Link to="/app" className="enter-app">
-                    <FiArrowRight size={26} color="rgba(0, 0, 0, 0.6" />
+                    <FiArrowRight size={26} />
                 </Link>
             </div>
          </div>

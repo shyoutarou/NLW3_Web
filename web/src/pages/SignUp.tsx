@@ -1,12 +1,13 @@
 import React, { FormEvent, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import api from '../services/api'
 import { toast } from 'react-toastify'
 import WrapperContent from '../components/WrapperContent';
 import Input from '../components/Input';
 import { FiArrowLeft } from 'react-icons/fi';
 
 import '../styles/pages/signup.css';
+
+import api from '../services/api'
 
 function SignUp() {
 
@@ -16,41 +17,28 @@ function SignUp() {
 
   const history = useHistory();
   
+  function isAble() {
+    return name !== '' && email !== '' && password !== ''
+  }
+
   async function handleCreateUser(e: FormEvent) {
     e.preventDefault()
-
     if (isAble()) {
       try {
-        await api.post('users', {
-          name,
-          email,
-          password
-          })
-
-          console.log(name,
-            email,
-            password)
-
+        await api.post('users', { name, email, password })
           history.push('/signup-success')
       } catch(e) {
-
         toast.error('Ocorreu um erro ao fazer o cadastro');
       }
     }
   }
 
-  function isAble() {
-    return name !== '' && email !== '' && password !== ''
-  }
-
   return (
       <WrapperContent id="page-content" className="page-content-left" container="form">
-
         <div className="signup-container">
-          <form className="signup-form"
-            onSubmit={(event) => handleCreateUser(event)}
+          <form className="signup-form" onSubmit={(event) => handleCreateUser(event)}
           >
-             <div className="top-bar-container">
+             <div className="signup-bar-container">
                 <Link className="signup-back" to="/login">
                     <FiArrowLeft color="#15C3D6" size={24} />
                 </Link>   

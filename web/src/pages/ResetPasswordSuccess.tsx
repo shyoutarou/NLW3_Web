@@ -3,7 +3,7 @@ import Success from '../components/Success'
 
 const ResetPasswordSuccess = () => {
     return (
-        <Success navigate="/"  className="success-container"
+        <Success navigate="/login"  className="success-container"
         button="Voltar ao login" 
         description="Sua nova senha já pode ser usada!" 
         title="Reset de senha concluído!" />

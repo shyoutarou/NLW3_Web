@@ -13,7 +13,7 @@ import OrphanagesMap from '../pages/OrphanagesMap';
 import CreateOrphanage from '../pages/CreateOrphanage';
 import Orphanage from '../pages/Orphanage';
 import CreateOrphanageSuccess from '../pages/CreateOrphanageSuccess';
-import TesteForms from '../pages/TesteForms';
+import NotFound from '../pages/NotFound';
 
 const AuthRoutes: React.FC = () => (
     <BrowserRouter>

@@ -14,25 +14,23 @@ function ResetPassword() {
     const [confirmPassword, setConfirmPassword] = useState<string>('123')
   
     const history = useHistory();
-    // const { id, token } = useParams();
+    const { id, token } : any = useParams();
 
     function handleResetSucess(e: FormEvent) {
         e.preventDefault();
     
         try {
             if (isAble() && password === confirmPassword) {
-        
-                history.push('/reset-password-success')
-                
-                // api.post(`resetPassword/${id}`, {
-                //   password,
-                //   token,
-                // }).then(() => {
+                       
+                api.post(`resetPassword/${id}`, {
+                  password,
+                  token,
+                }).then(() => {
                     
-                //       history.push('/reset-password-success')
-                // }).catch((error) =>{
-                //     toast.error('Ocorreu um erro ao fazer a alteração');
-                // })
+                      history.push('/reset-password-success')
+                }).catch((error) =>{
+                    toast.error('Ocorreu um erro ao fazer a alteração');
+                })
             } else {
             toast.error("Suas senhas não batem.")
             }
@@ -51,7 +49,7 @@ function ResetPassword() {
             <form className="resetpassword-form"
                  onSubmit={(event) => handleResetSucess(event)}
             >
-                <div className="top-bar-container">
+                <div className="resetpassword-bar-container">
                     <Link className="resetpassword-back" to="/login">
                         <FiArrowLeft color="#15C3D6" size={24} />
                     </Link>   

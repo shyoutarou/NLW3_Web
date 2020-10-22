@@ -4,6 +4,7 @@ import DashboardCreated from '../pages/DashboardCreated';
 import DashboardPending from '../pages/DashboardPending';
 import DeleteSuccess from '../pages/DeleteSuccess';
 import EditOrphanage from '../pages/EditOrphanage';
+import NotFound from '../pages/NotFound';
 import VerifyOrphanage from '../pages/VerifyOrphanage';
 
 const AppRoutes: React.FC = () => (
@@ -15,6 +16,7 @@ const AppRoutes: React.FC = () => (
         <Route path="/dashboardcreated/:id" component={DashboardCreated} />
         <Route path="/orphanages/edit/:id" component={EditOrphanage} />
         <Route path="/orphanages/verify/:id" component={VerifyOrphanage} />
+        <Route path="/loginerror" component={NotFound} />
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

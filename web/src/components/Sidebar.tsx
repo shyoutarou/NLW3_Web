@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { FiArrowLeft, FiPower, FiMapPin, FiInfo, FiStopCircle } from 'react-icons/fi';
+import { FiArrowLeft, FiPower, FiMapPin, FiInfo, FiStopCircle, FiAlertCircle } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/auth';
 
@@ -26,8 +26,8 @@ const Sidebar: FC<SidebarProps> = ({ children, logout, pending }) => {
       push('/dashboardcreated/1')
   }
 
-  const handlePending = (id: string) => {
-      push('/dashboardpending/' + id)
+  const handlePending = () => {
+      push('/dashboardpending/1')
   }
     
     return (
@@ -36,23 +36,22 @@ const Sidebar: FC<SidebarProps> = ({ children, logout, pending }) => {
         {logout && 
           <div>
             <button type="button" 
-                className={`optins-button${!pending && '-active'}`}
+                className={`optins-button${!pending ? '-active' : ''}`}
                 onClick={handleCreated}>
                 <FiMapPin size={24} color="#FFF" />
             </button>
             
-            
             <button type="button" 
-                className={`optins-button${pending && '-active'}`}
-                onClick={() => handlePending("1")}>
-                <FiInfo size={24} color="#FFF" />
+                className={`optins-button${pending ? '-active' : ''}`}
+                onClick={() => handlePending()}>
+                <div className="sidebar-yellow-icon">
+                <div className="yellow-circle">
+                    <div className="point"></div>
+                </div>
+                <FiAlertCircle color="#FFF" size={24} />
+                </div>
             </button>
 
-            <button type="button" 
-                className={`optins-button${pending && '-active'}`}
-                onClick={() => handlePending("2")}>
-                <FiStopCircle size={24} color="#FFF" />
-            </button>
           </div>
         }
         <footer>

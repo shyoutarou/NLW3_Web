@@ -14,7 +14,7 @@
     border: 0;
 }
 
-.login-container .top-bar-container {
+.login-bar-container {
     margin: 0 auto;
     display: flex;
     justify-content: space-between;
@@ -23,12 +23,12 @@
     padding: 1.6rem 0;
 }
 
-.login-container .top-bar-container a {
+.login-bar-container a {
     height: 3.2rem;
     transition: opacity 0.2s;
 }
 
-.login-container .top-bar-container a:hover {
+.login-bar-container a:hover {
     opacity: 0.6;
 }
 
@@ -143,7 +143,7 @@
 }
 
 .login-footer .signup p{
-    color: var(--color-primary-darker);
+    color: var(--color-text-complement);
     font-weight: 400;
 }
 
@@ -174,7 +174,7 @@
         width: 65%;
     }
 
-    .login-container .top-bar-container {
+    .login-bar-container {
         width: 90%;
     }
 

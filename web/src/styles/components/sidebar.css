@@ -40,9 +40,38 @@ aside.app-sidebar {
     cursor: not-allowed !important;
   }
   
+  .optins-button-active svg {
+    color:rgb(69, 40, 174)!important;
+  }
+
   aside.app-sidebar footer a:hover,
   aside.app-sidebar footer button:hover,
   .optins-button,
   .optins-button-active:hover {
     background: #17D6EB;
   }
+
+  
+.sidebar-yellow-icon {
+  border-radius: 16px;
+  cursor: pointer;
+  position: relative;
+}
+
+.yellow-circle {
+    position: absolute;
+    background-color: #12AFCB;
+    border-radius: 20px;
+    margin-left:17px;
+    margin-top:3px;
+}
+
+.point {
+    background-color: #FFD666;
+width: 1px;
+height: 1px;
+border-radius: 20px;
+padding: 4px;
+border: solid;
+border-width: 1px;
+}

@@ -1,6 +1,6 @@
 import React, { FormEvent, useEffect, useState } from 'react'
 import { Link, useHistory } from 'react-router-dom'
-import { useAuth } from '../contexts/auth'
+
 import { toast } from 'react-toastify'
 import WrapperContent from '../components/WrapperContent'
 import Input from '../components/Input'
@@ -9,6 +9,8 @@ import { FiArrowLeft, FiCheck } from 'react-icons/fi'
 import purpleHeartIcon from '../images/purple-heart.svg'
 
 import '../styles/pages/login.css'
+
+import { useAuth } from '../contexts/auth'
 
 const Login = () => {
 
@@ -42,8 +44,6 @@ const Login = () => {
     async function handleSignIn(e: FormEvent) {
         e.preventDefault()
     
-        console.log("token", "user");
-
         try {
             if (isAble()) {
               await signIn( email, password, rememberPassword);
@@ -63,8 +63,8 @@ const Login = () => {
             <form className="login-form"
             onSubmit={(event) => handleSignIn(event)}
             >
-             <div className="top-bar-container">
-                <Link className="signup-back" to="/login">
+             <div className="login-bar-container">
+                <Link className="login-back" to="/landing">
                     <FiArrowLeft color="#15C3D6" size={24} />
                 </Link>   
             </div>

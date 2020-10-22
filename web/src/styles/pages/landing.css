@@ -93,6 +93,9 @@
     align-items: center;
     transition: 0.5s;
     cursor: pointer;
+    color: var(--color-text-in-primary);
+    font: 600 18px Nunito, sans-serif;
+    text-decoration: none;
 }
 
 .restrict-access:hover {

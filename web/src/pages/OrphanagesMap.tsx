@@ -23,8 +23,20 @@ interface Orphanage {
 function OrphanagesMap() {
 
     const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
+    const [mapPosition, setMapPosition] = useState({ lat: -23.539417, lng: -46.560972})
 
     useEffect(() => {
+
+      if(navigator.geolocation) {
+        navigator.geolocation.getCurrentPosition(showposition => {
+          setMapPosition({
+            lat: showposition.coords.latitude,
+            lng: showposition.coords.longitude
+          })
+        }, (error => {
+          toast.error('Erro ao pegar sua localização. Mapa centralizado em Barra Funda/SP');            
+        }))
+      }
 
       try {
 
@@ -42,7 +54,7 @@ function OrphanagesMap() {
     return (
 
         <WrapperContent id="page-map" className="page-content-left" container="map">
-            <Map center={[-23.539417, -46.560972]}
+            <Map center={[mapPosition.lat, mapPosition.lng]} 
                  zoom={15}
                  style={{ width: '100%', height: '100%' }}>
 

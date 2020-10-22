@@ -10,38 +10,6 @@
     cursor: pointer;
 }
 
-.dashboard-warning-icon {
-    background-color: #12AFCB;
-    width: 48px;
-    height: 48px;
-    border-radius: 16px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    margin-bottom: 10px;
-    cursor: pointer;
-    position: relative;
-}
-
-.yellow-circle {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    position: absolute;
-    top: 9px;
-    right: 9px;
-    background-color: #12AFCB;
-    padding: 2px;
-    border-radius: 20px;
-}
-
-.point {
-    background-color: #FFD666;
-    width: 5px;
-    height: 5px;
-    border-radius: 20px;
-    padding: 5px;
-}
 
 .dashboard-main {
     flex: 1;
@@ -61,6 +29,11 @@
 
 .dashboard-title h2 {
     font-size: 32px;
+}
+
+.dashboard-orphanages {
+    display: flex;
+    justify-content: center;
 }
 
 .no-pending {

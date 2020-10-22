@@ -12,8 +12,7 @@ interface User {
 interface AuthState {
     token: string;
     user: User;
-  }
-
+}
 
 interface AuthContextData {
     signed: boolean;
@@ -27,7 +26,7 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 
 const AuthProvider: React.FunctionComponent = ({ children }) => {
 
-    const [data, setData] = useState<AuthState>(() => {
+    const [tokenUser, settokenUser] = useState<AuthState>(() => {
         let token = localStorage.getItem('@proffy:token');
         if (!token) {
           token = sessionStorage.getItem('@proffy:token');
@@ -39,53 +38,54 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
             Storageduser = sessionStorage.getItem('@proffy:user');
         }
     
-        // if (token && Storageduser) {
-        //   api.defaults.headers.authorization = `Bearer ${token}`;
+        if (token && Storageduser) {
+          api.defaults.headers.authorization = `Bearer ${token}`;
     
-        //   return { token, user: JSON.parse(Storageduser) };
-        // }
+          return { token, user: JSON.parse(Storageduser) };
+        }
     
         return {} as AuthState;
     });
 
     function handleToggleRemember(token: string, user: User){
-        setData({ token, user });
+        settokenUser({ token, user });
     }
 
     async function signIn(email: string, password: string, remember: boolean) {
 
-        // const login = await api.post('auth', {
-        //     email,
-        //     password,
-        //   });
+        const login = await api.post('auth', {
+            email,
+            password,
+          });
+
+        //   const login = await api.post('auth', { email, password });
+        //   const { token, user } = login.data;
 
         const { token, user } = { token: "1234",  user: {id: 1, name: "Jão", email: "joa@gmail.coom", password: "1234" } };
 
         console.log(token, user);
-        // api.defaults.headers.authorization = `Bearer ${token}`;
 
-        // if (remember) {
-        //     localStorage.setItem('@happy:token', token);
-        //     localStorage.setItem('@happy:user', JSON.stringify(user));
+        if (remember) {
+            localStorage.setItem('@happy:token', token);
+            localStorage.setItem('@happy:user', JSON.stringify(user));
 
-        // } else {
-        //     sessionStorage.setItem('@happy:token', token);
-        //     sessionStorage.setItem('@happy:user', JSON.stringify(user));
-        // }
+        } else {
+            sessionStorage.setItem('@happy:token', token);
+            sessionStorage.setItem('@happy:user', JSON.stringify(user));
+        }
     
-        setData({ token, user });
+        settokenUser({ token, user });
 
     }
 
     function signOut() {
         localStorage.clear();
         sessionStorage.clear();
-        setData({} as AuthState);
+        settokenUser({} as AuthState);
     }
 
     return(
-
-        <AuthContext.Provider value={{signed: !!data.token,user: data.user, signIn, signOut, handleToggleRemember}}>
+        <AuthContext.Provider value={{signed: !!tokenUser.token,user: tokenUser.user, signIn, signOut, handleToggleRemember}}>
             {children}
         </AuthContext.Provider>
     );

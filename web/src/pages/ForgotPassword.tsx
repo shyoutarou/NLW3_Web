@@ -18,20 +18,14 @@ const ForgotPassword = () => {
         e.preventDefault()
     
         try {
-        history.push('/forgot-password-success')
-
-        // try {
-        //     await api.post('/forgotPassword', {
-        //         email
-        //     })
+            await api.post('/forgotPassword', {
+                email
+            })
     
-        //     history.push('/forgot-password-success')
-        // } catch(e) {
-        //   toast.error('Email inexistente!');
-        // }
-        } catch (err) {
-            toast.error('Ocorreu um erro ao recuperar senha');
-        }        
+            history.push('/forgot-password-success')
+        } catch(e) {
+          toast.error('Email inexistente!');
+        } 
       }
 
       function isAble() {
@@ -44,7 +38,7 @@ const ForgotPassword = () => {
             <form className="forgotpassword-form"
                    onSubmit={(event) => handleReset(event)}
             >
-                <div className="top-bar-container">
+                <div className="forgotpassword-bar-container">
                     <Link className="forgotpassword-back" to="/login">
                         <FiArrowLeft color="#15C3D6" size={24} />
                     </Link>   

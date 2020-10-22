@@ -1,9 +1,9 @@
-import React, { ChangeEvent, FormEvent, useState } from "react";
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react";
 import { Map, Marker, TileLayer } from 'react-leaflet';
 import { LeafletMouseEvent } from 'leaflet';
 import { useHistory } from "react-router-dom";
 
-import { FiPlus } from "react-icons/fi";
+import { FiPlus, FiX } from "react-icons/fi";
 
 import '../styles/pages/create-orphanage.css';
 import Sidebar from "../components/Sidebar";
@@ -27,65 +27,78 @@ export default function CreateOrphanage() {
   const [open_on_weekends, setOpenOnWeekends] = useState(true);
   const [images, setImages] = useState<File[]>([]);
   const [previewImages, setPreviewImages] = useState<string[]>([]);
-
+  const [permission, setpermission] = useState(false);
+  const [mapPosition, setMapPosition] = useState({ lat: -23.539417, lng: -46.560972})
+  
+  useEffect(() => {
+    if(navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(showposition => {
+        setMapPosition({
+          lat: showposition.coords.latitude,
+          lng: showposition.coords.longitude
+        })
+      }, (error => {
+        toast.error('Erro ao pegar sua localização. Mapa centralizado em Barra Funda/SP');           
+      }))
+    }
+  }, [])
+  
   function handleMapClick(event: LeafletMouseEvent) {
-    const { lat, lng } = event.latlng;
-
     setPosition({
-      latitude: lat,
-      longitude: lng,
+      latitude: event.latlng.lat,
+      longitude: event.latlng.lng
     });
   }
   
   function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
-    
     if (!event.target.files) return; 
-
     const selectedImages = Array.from(event.target.files)
-
     setImages(selectedImages);
-
-    const selectedImagesPreview = selectedImages.map(image => {
-      return URL.createObjectURL(image);
+    selectedImages.map(image => {
+      const imageurl =  URL.createObjectURL(image)
+      setPreviewImages(previewImages => ([...previewImages, imageurl]))
     });
+  }
 
-    setPreviewImages(selectedImagesPreview);
+  const removeImage = (removeIndex: number) => {
+    const newPreviewImages = previewImages.filter((img, index) => index !== removeIndex)
+    const newImages = images.filter((img, index) => index !== removeIndex)
+    setImages(newImages)
+    setPreviewImages(newPreviewImages)
   }
 
   async function handleSubmit(event: FormEvent) {
     event.preventDefault();
 
     const { latitude, longitude } = position;
+   
+    try {
 
-    history.push('/orphanage-success');   
+      await api.post('orphanages', {name, latitude, longitude, about, whatsapp,
+      instructions, opening_hours, open_on_weekends, permission}).then(response => {
+
+        const { id } = response.data;
+
+        const dataimg =  new FormData();
     
-    // try {
-
-    //   await api.post('orphanages', {name, latitude, longitude, about, whatsapp,
-    //   instructions, opening_hours, open_on_weekends}).then(response => {
-
-    //     const { id } = response.data;
-
-    //     const dataimg =  new FormData();
-    
-    //     images.forEach(image => {
-    //       dataimg.append('images', image);
-    //     });
+        images.forEach(image => {
+          dataimg.append('images', image);
+        });
     
    
-    //     api.put(`orphanages/${id}`, dataimg);
+        api.put(`orphanages/${id}`, dataimg);
     
-    //     toast.success(
-    //       'Cadastro realizado com sucesso!',
-    //     );
+        toast.success(
+          'Cadastro realizado com sucesso!',
+        );
     
-    //     history.push('/app');   
+        history.push('/app');   
 
-    //   });
+      });
 
-    // } catch(e) {
-    //   toast.error('Ocorreu um erro ao fazer o cadastro');
-    // }
+    } catch(e) {
+      toast.error('Ocorreu um erro ao fazer o cadastro');
+    }
 
   }
   
@@ -99,7 +112,7 @@ export default function CreateOrphanage() {
             <legend>Dados</legend>
 
             <Map 
-              center={[-23.539417,-46.560972]} 
+              center={[mapPosition.lat, mapPosition.lng]} 
               style={{ width: '100%', height: 280 }}
               zoom={15}
               onClick={handleMapClick}
@@ -148,20 +161,22 @@ export default function CreateOrphanage() {
 
             <div className="input-block">
               <label htmlFor="images">Fotos</label>
-
               <div className="images-container">
-                {previewImages.map(image => (
-                  <img key={image} src={image} alt={name} />
-                ))}
-
+                {previewImages.map((image, index) => {
+                  return (
+                    <div className="img-container">
+                      <div className="close" onClick={() => removeImage(index)}>
+                        <FiX size={20} color='black' />
+                      </div>
+                      <img src={image} key={index} alt={name}></img>
+                    </div>
+                  )
+                })}
                 <label htmlFor="image[]" className="new-image">
                   <FiPlus size={24} color="#15b6d6" />
                 </label>
+                <input type="file"  multiple id="image[]" onChange={handleSelectImages} />
               </div>
-
-              <input type="file"  multiple
-                      id="image[]" 
-                      onChange={handleSelectImages} />
             </div>
           </fieldset>
 
