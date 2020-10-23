@@ -23,11 +23,11 @@ const Sidebar: FC<SidebarProps> = ({ children, logout, pending }) => {
   }
 
   const handleCreated = () => {
-      push('/dashboardcreated/1')
+      push('/approvedlist/1')
   }
 
   const handlePending = () => {
-      push('/dashboardpending/1')
+      push('/pendinglist')
   }
     
     return (

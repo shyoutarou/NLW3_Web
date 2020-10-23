@@ -19,7 +19,7 @@ interface IOrphanages {
   longitude: number
 }
 
-const DashboardPending = () => {
+const PendingList = () => {
 
   const { push } = useHistory()
 
@@ -48,12 +48,12 @@ const DashboardPending = () => {
       container="pending" logout>
       <div className="dashboard-main">
           <div className="dashboard-title">
-              <h2>Cadastros pendentes</h2>
+              <h2>Orfanatos Disponíveis</h2>
               <p>{ orphanages.length }  pendentes</p>
           </div>
 
           <div className="dashboard-orphanages">
-          {params.id == "0"? 
+          { orphanages.length  == 0  ? 
              <div className="no-pending">
                  <img src={noPending} alt="nenhum"/>
                  <p>Nenhum no momento</p>
@@ -69,4 +69,4 @@ const DashboardPending = () => {
   )
 }
 
-export default DashboardPending
+export default PendingList

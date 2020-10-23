@@ -1,4 +1,4 @@
-import React, { ChangeEvent, FormEvent, useState } from "react"
+import React, { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import { Map, Marker, TileLayer } from 'react-leaflet'
 import L from 'leaflet'
 
@@ -7,24 +7,81 @@ import { FiPlus, FiX, FiXCircle, FiCheck } from "react-icons/fi"
 import '../styles/pages/create-orphanage.css'
 import mapIcon from "../utils/mapIcon"
 import api from "../services/api"
-import { useHistory } from "react-router-dom"
+import { useHistory, useLocation, useParams } from "react-router-dom"
 import WrapperContent from "../components/WrapperContent"
+
+import { useAuth } from '../contexts/auth'
+import { toast } from "react-toastify"
+
+interface ILocation {
+  id: number
+}
+
+interface OrphanageParams {
+  id: string;
+}
+
+interface IOrphanage {
+  id: number
+  name: string
+  latitude: number
+  longitude: number
+  about: string
+  whatsapp: string
+  instructions: string
+  opening_hours: string
+  open_on_weekends: boolean
+  images: {
+    id: number
+    url: string
+  }[]
+}
 
 export default function VerifyOrphanage() {
 
   const { push } = useHistory()
-
+  const params = useParams<OrphanageParams>();
+  
   const [position, setPosition] = useState({ lat: 0, lng: 0 })
 
+  const location = useLocation<ILocation>()
+  const { user } = useAuth();
 
   const [name, setName] = useState('')
   const [about, setAbout] = useState('')
+  const [whatsapp, setWhatsApp] = useState('');
   const [instructions, setInstructions] = useState('')
   const [opening_hours, setOpeningHours] = useState('')
   const [open_on_weekends, setOpenOnWeekends] = useState(true)
   const [images, setImages] = useState<File[]>([])
   const [previewImages, setPreviewImages] = useState<string[]>([])
+  const [permission, setpermission] = useState(true)
+  
+  const [orphanage, setOrphanage] = useState<IOrphanage>()
 
+  useEffect(() => {
+    if(!params) {
+      return push('/pendinglist')
+    }
+
+    api.get<IOrphanage>(`orphanages/${params.id}`).then(res => {
+      setOrphanage(res.data)
+      setName(res.data.name)
+      setAbout(res.data.about)
+      setWhatsApp(res.data.whatsapp)
+      setInstructions(res.data.instructions)
+      setOpenOnWeekends(res.data.open_on_weekends)
+      setOpeningHours(res.data.opening_hours)
+      setPreviewImages(res.data.images.map(e => e.url))
+
+      setPosition({
+        lat: res.data.latitude,
+        lng: res.data.longitude
+      })
+
+    })
+  }, [])
+  
   const handleMapClick = (event: L.LeafletMouseEvent) => {
     setPosition({
       lat: event.latlng.lat,
@@ -32,41 +89,49 @@ export default function VerifyOrphanage() {
     })
   }
 
+  //VERIFICAR DE TRATAR OS EVENTOS DE ACEITAR E RECUSAR EM UM EVENTO
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    const { lat: latitude, lng: longitude } = position
-  
-    const data = new FormData()
-    data.append('name', name)
-    data.append('latitude', String(latitude))
-    data.append('longitude', String(latitude))
-    data.append('about', about)
-    data.append('instructions', instructions)
-    data.append('opening_hours', opening_hours)
-    data.append('open_on_weekends', String(open_on_weekends))
-    images.forEach(img => {
-      data.append('images', img)
-    })
 
+    const { lat: latitude, lng: longitude } = position;
+   
     try {
-      await api.post('/orphanages', data)
-      alert('Cadastro realizado com sucesso!')
-      push('/app')
-    } catch {
-      alert('Erro ao cadastrar')
+
+      await api.put('orphanages', {name, latitude, longitude, about, whatsapp,
+      instructions, opening_hours, open_on_weekends, permission}).then(response => {
+
+        const { id } = response.data;
+
+        const dataimg =  new FormData();
+    
+        images.forEach(image => {
+          dataimg.append('images', image);
+        });
+    
+   
+        api.put(`orphanages/${id}`, dataimg);
+    
+        toast.success(
+          'Orfanato favoritado com sucesso!',
+        );
+    
+        push('/app');   
+
+      });
+
+    } catch(e) {
+      toast.error('Ocorreu um erro ao favoritar o orfanato');
     }
   }
-
-  const handleSelectImages = (e: ChangeEvent<HTMLInputElement>) => {
-    if(!e.target.files) {
-      return
-    }
-    const selectedImages = Array.from(e.target.files)
-    setImages(selectedImages)
-    const selectedImagesPreview = selectedImages.map(img => {
-      return URL.createObjectURL(img)
-    })
-    setPreviewImages(selectedImagesPreview)
+    
+  function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
+    if (!event.target.files) return; 
+    const selectedImages = Array.from(event.target.files)
+    setImages(selectedImages);
+    selectedImages.map(image => {
+      const imageurl =  URL.createObjectURL(image)
+      setPreviewImages(previewImages => ([...previewImages, imageurl]))
+    });
   }
 
   const removeImage = (removeIndex: number) => {
@@ -74,6 +139,36 @@ export default function VerifyOrphanage() {
     const newImages = images.filter((img, index) => index !== removeIndex)
     setImages(newImages)
     setPreviewImages(newPreviewImages)
+  }
+
+  
+  const accept = async () => {
+    try {
+
+      // permission == true
+      //id_user user
+      await api.put(`/orphanages/approve/${location.state.id}`)
+      push('/approvedlist')
+    } catch {
+      alert('erro ao aprovar, tente novamente mais tarde')
+    }
+  }
+
+  const deny = async () => {
+    try {
+
+      // permission == false
+      //id_user
+      await api.delete(`/orphanages/delete/${location.state.id}`)
+      push('/pendinglist')
+    } catch {
+      alert('erro ao recusasr, tente novamente mais tarde')
+    }
+  }
+
+
+  if(!orphanage) {
+    return <h1>Carregando</h1>
   }
 
   return (
@@ -86,7 +181,7 @@ export default function VerifyOrphanage() {
             <legend>Dados</legend>
 
             <Map 
-              center={[-27.2092052,-49.6401092]} 
+              center={[orphanage.latitude,orphanage.longitude]} 
               style={{ width: '100%', height: 280 }}
               zoom={15}
               onclick={handleMapClick}
@@ -109,6 +204,17 @@ export default function VerifyOrphanage() {
               <label htmlFor="about">Sobre <span>Máximo de 300 caracteres</span></label>
               <textarea id="about" maxLength={300} value={about} onChange={e => setAbout(e.target.value)} />
             </div>
+
+
+            <div className="input-block">
+              <label htmlFor="name">Whatsapp</label>
+              <input
+                id="Whatsapp"
+                value={whatsapp}
+                onChange={event => setWhatsApp(event.target.value)}
+              />
+            </div>
+
 
             <div className="input-block">
               <label htmlFor="images">Fotos</label>
@@ -162,10 +268,10 @@ export default function VerifyOrphanage() {
           </fieldset>
 
           <div className="verify-orphanage-buttons">
-            <button className="verify-confirm-button" type="submit">
-                <FiCheck size={20} color='white' /> Confirmar
+            <button onClick={accept}  className="verify-confirm-button" type="submit">
+                <FiCheck  size={20} color='white' /> Favoritar
             </button>
-            <button className="verify-deny-button" type="submit">
+            <button  onClick={deny}  className="verify-deny-button" type="submit">
                 <FiXCircle size={20} color='white' /> Recusar
             </button>
           </div>

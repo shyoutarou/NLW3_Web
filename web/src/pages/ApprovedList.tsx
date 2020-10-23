@@ -1,8 +1,10 @@
 import React, { useEffect, useState } from "react"
-import '../styles/pages/dashboard.css'
 import Orphanages from "../components/Orphanages"
 import WrapperContent from "../components/WrapperContent"
 import api from "../services/api"
+
+import '../styles/pages/dashboard.css'
+import noPending from '../images/nopending.svg'
 
 interface IOrphanages {
   id: number
@@ -11,7 +13,7 @@ interface IOrphanages {
   longitude: number
 }
 
-const DashboardCreated = () => {
+const ApprovedList = () => {
 
   const [orphanages, setOrphanages] = useState<IOrphanages[]>([])
 
@@ -35,16 +37,25 @@ const DashboardCreated = () => {
         container="created" logout>
       <div className="dashboard-main">
           <div className="dashboard-title">
-              <h2>Orfanatos cadastrados</h2>
+              <h2>Orfanatos Favoritos</h2>
               <p>{ orphanages.length } Orfanatos</p>
           </div>
 
           <div className="dashboard-orphanages">
-                {renderOrphanages()}
-            </div>
+          { orphanages.length  == 0  ? 
+             <div className="no-pending">
+                 <img src={noPending} alt="nenhum"/>
+                 <p>Nenhum no momento</p>
+             </div>
+           : 
+              <div className="dashboard-orphanages">
+              {renderOrphanages()}
+              </div>
+          }
+          </div>
       </div>
     </WrapperContent>
   )
 }
 
-export default DashboardCreated
+export default ApprovedList

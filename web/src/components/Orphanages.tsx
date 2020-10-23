@@ -19,8 +19,7 @@ const Orphanages: FC<CreatedProps> = ({ permission, id, latitude, longitude, nam
   const { push } = useHistory()
 
   const handleEdit = () => {
-    console.log(permission)
-    permission? push(`/orphanages/verify/${id}`) : push(`/orphanages/edit/${id}`)
+    !permission? push(`/orphanages/verify/${id}`) : push(`/orphanages/edit/${id}`)
   }
 
   const handleDelete = () => {
