@@ -22,9 +22,9 @@ const Success: React.FC<SuccessProps> = ({ title, description, button, navigate,
                 <h1 className="success-title z1">{title}</h1>
                 <p className="success-description z1">{description}</p>
                 <button onClick={() => history.push(navigate)} 
-                  className={className=="success-container" ? "success-button z1" : "delete-button z1"} >{button}</button>
+                  className={className === "success-container" ? "success-button z1" : "delete-button z1"} >{button}</button>
             </div>
-            <img className="z1" src={className=="success-container" ? successIcon : deleteIcon} alt="sucesso"/>
+            <img className="z1" src={className === "success-container" ? successIcon : deleteIcon} alt="sucesso"/>
         </div>
     )
 }

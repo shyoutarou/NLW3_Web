@@ -26,6 +26,7 @@ function SignUp() {
     if (isAble()) {
       try {
         await api.post('users', { name, email, password })
+          .catch(error => toast.error('Ocorreu um erro ao fazer o cadastro'));
           history.push('/signup-success')
       } catch(e) {
         toast.error('Ocorreu um erro ao fazer o cadastro');

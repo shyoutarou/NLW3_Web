@@ -63,8 +63,6 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
 
         const { token, user } = { token: "1234",  user: {id: 1, name: "Jão", email: "joa@gmail.coom", password: "1234" } };
 
-        console.log(token, user);
-
         if (remember) {
             localStorage.setItem('@happy:token', token);
             localStorage.setItem('@happy:user', JSON.stringify(user));

@@ -6,7 +6,6 @@ import { useHistory } from "react-router-dom";
 import { FiPlus, FiX } from "react-icons/fi";
 
 import '../styles/pages/create-orphanage.css';
-import Sidebar from "../components/Sidebar";
 
 import mapIcon from '../utils/mapIcon';
 import api from "../services/api";
@@ -31,16 +30,11 @@ export default function CreateOrphanage() {
   const [mapPosition, setMapPosition] = useState({ lat: -23.539417, lng: -46.560972})
   
   useEffect(() => {
-    if(navigator.geolocation) {
-      navigator.geolocation.getCurrentPosition(showposition => {
-        setMapPosition({
-          lat: showposition.coords.latitude,
-          lng: showposition.coords.longitude
-        })
-      }, (error => {
-        toast.error('Erro ao pegar sua localização. Mapa centralizado em Barra Funda/SP');           
-      }))
-    }
+
+    setMapPosition({
+      lat:  Number(localStorage.getItem('@happy:latitude')),
+      lng:  Number(localStorage.getItem('@happy:longitude'))
+    })
   }, [])
   
   function handleMapClick(event: LeafletMouseEvent) {
@@ -94,7 +88,7 @@ export default function CreateOrphanage() {
     
         history.push('/app');   
 
-      });
+      }).catch(error => toast.error('Ocorreu um erro ao fazer o cadastro'));
 
     } catch(e) {
       toast.error('Ocorreu um erro ao fazer o cadastro');

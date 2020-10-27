@@ -1,5 +1,5 @@
 import React, { FC } from 'react'
-import { FiArrowLeft, FiPower, FiMapPin, FiInfo, FiStopCircle, FiAlertCircle } from 'react-icons/fi';
+import { FiArrowLeft, FiPower, FiMapPin, FiAlertCircle } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/auth';
 

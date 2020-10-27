@@ -117,7 +117,7 @@ export default function EditOrphanage() {
     
         push('/app');   
 
-      });
+      }).catch(error => toast.error('Ocorreu um erro ao fazer o cadastro'));
 
     } catch(e) {
       toast.error('Ocorreu um erro ao favoritar o orfanato');

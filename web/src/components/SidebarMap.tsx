@@ -1,6 +1,6 @@
-import React, { FC } from 'react'
-import { FiArrowLeft, FiLogOut } from 'react-icons/fi';
-import { Link, useHistory } from 'react-router-dom';
+import React, { FC, useEffect, useState } from 'react'
+import { FiArrowLeft } from 'react-icons/fi';
+import { Link } from 'react-router-dom';
 
 import mapMarkerImg from '../images/map-marker.svg';
 
@@ -12,6 +12,18 @@ interface SidebarMapProps {
 
 const SidebarMap: FC<SidebarMapProps> = ({ children, logout }) => {
 
+    const [selectedUf, setSelectedUf] = useState('')
+    const [selectedCity, setSelectedCity] = useState('')
+
+    useEffect(() => {
+
+      if(localStorage.getItem('@happy:latitude'))
+      {
+          setSelectedUf(String(localStorage.getItem('@happy:estado')))
+          setSelectedCity(String(localStorage.getItem('@happy:cidade')))
+      }
+    }, []);
+      
     return (
         <aside>
             <header>
@@ -25,8 +37,8 @@ const SidebarMap: FC<SidebarMapProps> = ({ children, logout }) => {
                 <p>Muitas crianças estão esperando a sua visita :)</p>
             </header>
             <footer>
-                <strong>São Paulo</strong>
-                <span>São Paulo</span>
+                <strong>{selectedUf}</strong>
+                <span>{selectedCity}</span>
             </footer>
         </aside>
     );

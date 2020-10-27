@@ -1,4 +1,4 @@
-import React, { ButtonHTMLAttributes, LinkHTMLAttributes } from 'react';
+import React, { LinkHTMLAttributes } from 'react';
 
 import '../styles/components/primarybutton.css';
 

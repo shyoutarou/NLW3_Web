@@ -4,8 +4,9 @@ import '../styles/pages/dashboard.css'
 import noPending from '../images/nopending.svg'
 import Orphanages from "../components/Orphanages"
 import WrapperContent from "../components/WrapperContent"
-import { useHistory, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import api from "../services/api"
+import { toast } from "react-toastify"
 
 interface PendingParams {
   id: string;
@@ -21,19 +22,22 @@ interface IOrphanages {
 
 const PendingList = () => {
 
-  const { push } = useHistory()
-
   const params = useParams<PendingParams>();
 
   const [orphanages, setOrphanages] = useState<IOrphanages[]>([])
 
   useEffect(() => {
-      api.get<IOrphanages[]>('/indexPending/0').then(res => {
-          setOrphanages(res.data)
-      })
-  }, [])
 
-  
+      try {
+           api.get<IOrphanages[]>('/indexPending/0').then(res => {
+            setOrphanages(res.data)
+        }).catch(error => toast.error('Ocorreu um erro ao recuperar o orfanato'));
+      } catch(e) {
+        toast.error('Email inexistente!');
+      } 
+      
+  }, [])
+ 
   const renderOrphanages = () => {
       return orphanages.map(orphanage => {
           return (
@@ -53,7 +57,7 @@ const PendingList = () => {
           </div>
 
           <div className="dashboard-orphanages">
-          { orphanages.length  == 0  ? 
+          { orphanages.length  === 0  ? 
              <div className="no-pending">
                  <img src={noPending} alt="nenhum"/>
                  <p>Nenhum no momento</p>

@@ -5,6 +5,7 @@ import api from "../services/api"
 
 import '../styles/pages/dashboard.css'
 import noPending from '../images/nopending.svg'
+import { toast } from "react-toastify"
 
 interface IOrphanages {
   id: number
@@ -18,9 +19,15 @@ const ApprovedList = () => {
   const [orphanages, setOrphanages] = useState<IOrphanages[]>([])
 
   useEffect(() => {
-      api.get('/indexPending/1').then(res => {
-          setOrphanages(res.data)
-      })
+
+    try {
+            api.get<IOrphanages[]>('/indexPending/1').then(res => {
+            setOrphanages(res.data)
+        }).catch(error => toast.error('Ocorreu um erro ao recuperar os orfanatos'));
+      } catch(e) {
+        toast.error('Ocorreu um erro ao recuperar os orfanatos');
+      } 
+
   }, [])
   
   const renderOrphanages = () => {

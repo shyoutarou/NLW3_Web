@@ -20,7 +20,7 @@ const ForgotPassword = () => {
         try {
             await api.post('/forgotPassword', {
                 email
-            })
+            }).catch(error => toast.error('Ocorreu um erro ao enviar e-mail'));
     
             history.push('/forgot-password-success')
         } catch(e) {

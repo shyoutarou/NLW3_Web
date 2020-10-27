@@ -73,13 +73,13 @@ export default function VerifyOrphanage() {
       setOpenOnWeekends(res.data.open_on_weekends)
       setOpeningHours(res.data.opening_hours)
       setPreviewImages(res.data.images.map(e => e.url))
-
+      
       setPosition({
         lat: res.data.latitude,
         lng: res.data.longitude
       })
 
-    })
+    }).catch(error => toast.error('Ocorreu um erro ao recuperar o orfanato'));
   }, [])
   
   const handleMapClick = (event: L.LeafletMouseEvent) => {
@@ -117,7 +117,7 @@ export default function VerifyOrphanage() {
     
         push('/app');   
 
-      });
+      }).catch(error => toast.error('Ocorreu um erro ao favoritar o cadastro'));
 
     } catch(e) {
       toast.error('Ocorreu um erro ao favoritar o orfanato');
@@ -148,9 +148,10 @@ export default function VerifyOrphanage() {
       // permission == true
       //id_user user
       await api.put(`/orphanages/approve/${location.state.id}`)
+      .catch(error => toast.error('Ocorreu um erro aprovar o orfanato'));
       push('/approvedlist')
     } catch {
-      alert('erro ao aprovar, tente novamente mais tarde')
+      alert('Ocorreu um erro ao aprovar o orfanato')
     }
   }
 
@@ -160,9 +161,10 @@ export default function VerifyOrphanage() {
       // permission == false
       //id_user
       await api.delete(`/orphanages/delete/${location.state.id}`)
+      .catch(error => toast.error('Ocorreu um erro ao reprovar o orfanato'));
       push('/pendinglist')
     } catch {
-      alert('erro ao recusasr, tente novamente mais tarde')
+      alert('Ocorreu um erro ao reprovar o orfanato')
     }
   }
 

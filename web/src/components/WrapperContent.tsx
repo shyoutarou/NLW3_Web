@@ -14,8 +14,8 @@ interface WrapperProps {
 const WrapperContent: FC<WrapperProps> = ({ children, id, className, container, logout }) => {
   return (
     <div id={id} className={className}>
-      {container == 'form'? <SidebarForm />  : container == 'map'? 
-        <SidebarMap/> : container == 'pending'?  
+      {container === 'form'? <SidebarForm />  : container === 'map'? 
+        <SidebarMap/> : container === 'pending'?  
         <Sidebar logout={logout} pending /> : 
         <Sidebar logout={logout}/> }
       {children}

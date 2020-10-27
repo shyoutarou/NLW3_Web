@@ -1,13 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
-import { FiPlus, FiArrowRight, FiArrowLeft } from 'react-icons/fi';
+import { FiPlus, FiArrowRight } from 'react-icons/fi';
 import { Map, TileLayer, Marker, Popup} from 'react-leaflet';
 
 import 'leaflet/dist/leaflet.css';
 import '../styles/pages/orphanages-map.css'
 
-import mapMarkerImg from '../images/map-marker.svg';
 import mapIcon from '../utils/mapIcon';
 import api from '../services/api';
 import { toast } from 'react-toastify';
@@ -24,26 +23,21 @@ function OrphanagesMap() {
 
     const [orphanages, setOrphanages] = useState<Orphanage[]>([]);
     const [mapPosition, setMapPosition] = useState({ lat: -23.539417, lng: -46.560972})
-
+    
     useEffect(() => {
 
-      if(navigator.geolocation) {
-        navigator.geolocation.getCurrentPosition(showposition => {
+      if(localStorage.getItem('@happy:latitude'))
+      {
           setMapPosition({
-            lat: showposition.coords.latitude,
-            lng: showposition.coords.longitude
+            lat:  Number(localStorage.getItem('@happy:latitude')),
+            lng:  Number(localStorage.getItem('@happy:longitude'))
           })
-        }, (error => {
-          toast.error('Erro ao pegar sua localização. Mapa centralizado em Barra Funda/SP');            
-        }))
       }
 
       try {
-
-        api.get('orphanages').then(response => {
-          setOrphanages(response.data);
-        });
-  
+            api.get('orphanages').then(response => {
+              setOrphanages(response.data);
+            }).catch(error => toast.error('Ocorreu um erro ao recuperar os orfanatos'));
       } catch(e) {
   
         toast.error('Ocorreu um erro ao recuperar os orfanatos');

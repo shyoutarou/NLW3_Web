@@ -43,7 +43,7 @@ const Login = () => {
       
     async function handleSignIn(e: FormEvent) {
         e.preventDefault()
-    
+        setRemember(rememberPassword);
         try {
             if (isAble()) {
               await signIn( email, password, rememberPassword);

@@ -43,7 +43,7 @@ export default function Orphanage() {
 
       api.get(`orphanages/${params.id}`).then(response => {
         setOrphanage(response.data);
-      });
+      }).catch(error => toast.error('Ocorreu um erro ao recuperar o orfanato'));
 
     } catch(e) {
 
