@@ -31,6 +31,7 @@ export default function CreateOrphanage() {
   
   useEffect(() => {
 
+    setpermission(false)
     setMapPosition({
       lat:  Number(localStorage.getItem('@happy:latitude')),
       lng:  Number(localStorage.getItem('@happy:longitude'))
@@ -48,10 +49,12 @@ export default function CreateOrphanage() {
     if (!event.target.files) return; 
     const selectedImages = Array.from(event.target.files)
     setImages(selectedImages);
-    selectedImages.map(image => {
+    selectedImages.forEach(image => {
       const imageurl =  URL.createObjectURL(image)
       setPreviewImages(previewImages => ([...previewImages, imageurl]))
     });
+
+    console.log(previewImages)
   }
 
   const removeImage = (removeIndex: number) => {
@@ -62,38 +65,28 @@ export default function CreateOrphanage() {
   }
 
   async function handleSubmit(event: FormEvent) {
-    event.preventDefault();
 
+    event.preventDefault();
     const { latitude, longitude } = position;
    
     try {
+        await api.post('orphanages', {name, latitude, longitude, about, whatsapp,
+        instructions, opening_hours, open_on_weekends, permission}).then(response => {
 
-      await api.post('orphanages', {name, latitude, longitude, about, whatsapp,
-      instructions, opening_hours, open_on_weekends, permission}).then(response => {
-
-        const { id } = response.data;
-
-        const dataimg =  new FormData();
-    
-        images.forEach(image => {
-          dataimg.append('images', image);
-        });
-    
-   
-        api.put(`orphanages/${id}`, dataimg);
-    
-        toast.success(
-          'Cadastro realizado com sucesso!',
-        );
-    
-        history.push('/app');   
+          const { id } = response.data;
+          const dataimg =  new FormData();
+      
+          images.forEach(image => {dataimg.append('images', image);});
+      
+          api.put(`orphanages/images/${id}`, dataimg);
+      
+          toast.success('Cadastro realizado com sucesso!');
+          history.push('/app');   
 
       }).catch(error => toast.error('Ocorreu um erro ao fazer o cadastro'));
-
     } catch(e) {
       toast.error('Ocorreu um erro ao fazer o cadastro');
     }
-
   }
   
   return (
@@ -158,11 +151,11 @@ export default function CreateOrphanage() {
               <div className="images-container">
                 {previewImages.map((image, index) => {
                   return (
-                    <div className="img-container">
+                    <div key={index} className="img-container">
                       <div className="close" onClick={() => removeImage(index)}>
                         <FiX size={20} color='black' />
                       </div>
-                      <img src={image} key={index} alt={name}></img>
+                      <img src={image} alt={name}></img>
                     </div>
                   )
                 })}

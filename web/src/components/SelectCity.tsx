@@ -30,9 +30,9 @@ const SelectCity: React.FC<SelectUFsProps> = ({ options, selectedUf, ...rest}) =
 
     axios.get<IBGEUFProps[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`)
         .then(response => {
-        response.data.map(city => { 
-            setCities(cities => ([...cities, { id: city.nome, value: city.nome } ]))
-        } )
+            response.data.forEach(city => { 
+                setCities(cities => ([...cities, { id: city.nome, value: city.nome } ]))
+            })
         }).catch(error => toast.error('Ocorreu um erro ao recuperar dados do IBGE'));
 
     }, [selectedUf])

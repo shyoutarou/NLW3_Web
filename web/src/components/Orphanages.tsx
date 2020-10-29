@@ -23,7 +23,7 @@ const Orphanages: FC<CreatedProps> = ({ permission, id, latitude, longitude, nam
   }
 
   const handleDelete = () => {
-      push('/delete-success')
+      push(`/delete-success/${id}`)
   }
   
   return (

@@ -1,6 +1,6 @@
 import React, { ChangeEvent, useEffect, useState } from 'react';
 import { FiArrowRight } from 'react-icons/fi';
-import { Link, useHistory } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 
 import '../styles/pages/landing.css';
 import logoImg from '../images/logo.svg'
@@ -39,14 +39,6 @@ function Landing() {
     const [selectedSigla, setselectedSigla] = useState('')
     const [selectedUf, setSelectedUf] = useState('')
     const [selectedCity, setSelectedCity] = useState('')
-    const [ufs, setUfs] = useState<SelectProps[]>([])
-
-    const { push } = useHistory()
-      
-    const [coodenadas, setcoodenadas] = useState<Coordenadas>();
-
-//https://nominatim.openstreetmap.org/search?addressdetails=1&city=Campinas&state=S%C3%A3o%20Paulo&country=Brasil&format=json&limit=1
-//https://nominatim.openstreetmap.org/reverse?addressdetails=1&lat=-27.2092052&lon=-49.6401092&format=json
 
     useEffect(() => {
 
@@ -72,10 +64,10 @@ function Landing() {
 
                        axios.get<IBGEUFProps[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
                        .then(response => {
-                       response.data.map(uf => setUfs(ufs => ([...ufs, { id: uf.sigla, value: uf.nome} ])) )
                              
-                       const siglas  = response.data.find(uf => address.state);
-              
+                       const siglas  = response.data.find(uf => uf.nome === address.state);
+            
+                       localStorage.setItem('@happy:sigla', String(siglas?.sigla));
                        setselectedSigla(String(siglas?.sigla))
                        setSelectedUf(String(siglas?.nome))
                        setSelectedCity(String(localStorage.getItem('@happy:cidade')))
@@ -119,8 +111,7 @@ function Landing() {
     }
 
     function handleSelectUf(event: ChangeEvent<HTMLSelectElement>) {
-        console.log(event.target.value, event.target.options[event.target.selectedIndex].text)
-        
+       
         setselectedSigla(event.target.value)
         setSelectedUf(event.target.options[event.target.selectedIndex].text)
     }
@@ -134,7 +125,6 @@ function Landing() {
          axios.get<Coordenadas[]>(url)
         .then(response => {
 
-            console.log(response.data)
             const{  lat, lon, address } = response.data[0];
 
             localStorage.setItem('@happy:latitude', lat);

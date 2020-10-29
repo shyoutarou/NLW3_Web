@@ -1,4 +1,4 @@
-import React, { FC } from 'react'
+import React from 'react'
 import { FiArrowLeft, FiPower, FiMapPin, FiAlertCircle } from 'react-icons/fi';
 import { useHistory } from 'react-router-dom';
 import { useAuth } from '../contexts/auth';
@@ -11,7 +11,7 @@ interface SidebarProps {
   pending?: boolean
 }
 
-const Sidebar: FC<SidebarProps> = ({ children, logout, pending }) => {
+const Sidebar: React.FunctionComponent<SidebarProps> = ({ logout, pending }) => {
 
   const { push, goBack } = useHistory()
   const { signOut } = useAuth();
@@ -23,7 +23,7 @@ const Sidebar: FC<SidebarProps> = ({ children, logout, pending }) => {
   }
 
   const handleCreated = () => {
-      push('/approvedlist/1')
+      push('/approvedlist')
   }
 
   const handlePending = () => {

@@ -1,4 +1,4 @@
-import React, { FC, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { FiArrowLeft } from 'react-icons/fi';
 import { Link } from 'react-router-dom';
 
@@ -6,11 +6,7 @@ import mapMarkerImg from '../images/map-marker.svg';
 
 import '../styles/components/sidebarmap.css';
 
-interface SidebarMapProps {
-  logout?: boolean
-}
-
-const SidebarMap: FC<SidebarMapProps> = ({ children, logout }) => {
+const SidebarMap: React.FunctionComponent = () => {
 
     const [selectedUf, setSelectedUf] = useState('')
     const [selectedCity, setSelectedCity] = useState('')

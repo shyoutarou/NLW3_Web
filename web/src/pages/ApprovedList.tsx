@@ -33,7 +33,7 @@ const ApprovedList = () => {
   const renderOrphanages = () => {
     return orphanages.map(orphanage => {
         return (
-            <Orphanages {...orphanage}  />
+            <Orphanages key={orphanage.id}  {...orphanage}  />
         )
     })
   }
@@ -49,7 +49,7 @@ const ApprovedList = () => {
           </div>
 
           <div className="dashboard-orphanages">
-          { orphanages.length  == 0  ? 
+          { orphanages.length === 0  ? 
              <div className="no-pending">
                  <img src={noPending} alt="nenhum"/>
                  <p>Nenhum no momento</p>

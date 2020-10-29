@@ -1,21 +1,9 @@
 import React from 'react'
 
 import logoImg from '../images/map-marker.svg';
-import squaredBgImg from '../images/squared-background.svg';
-
 import '../styles/components/sidebarform.css';
 
-const logoContainerStyle = {
-  backgroundImage: `url(${squaredBgImg})`,
-  backgroundSize: 'contain',
-  backgroundRepeat: 'no-repeat',
-  backgroundPosition: 'center',
-  zIndex: 0,
-}
-
-const SidebarForm: React.FunctionComponent<{ background?: boolean }> = ({
-  background = true,
-}) => {
+const SidebarForm: React.FunctionComponent = () => {
   return (
 
     <div className="sidebarform-container">

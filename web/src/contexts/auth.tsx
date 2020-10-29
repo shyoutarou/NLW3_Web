@@ -53,15 +53,11 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
 
     async function signIn(email: string, password: string, remember: boolean) {
 
-        const login = await api.post('auth', {
-            email,
-            password,
-          });
+        const login = await api.post('auth', { email, password });
 
-        //   const login = await api.post('auth', { email, password });
-        //   const { token, user } = login.data;
+        const { token, user } = login.data;
 
-        const { token, user } = { token: "1234",  user: {id: 1, name: "Jão", email: "joa@gmail.coom", password: "1234" } };
+        // const { token, user } = { token: "1234",  user: {id: 1, name: "Jão", email: "joa@gmail.coom", password: "1234" } };
 
         if (remember) {
             localStorage.setItem('@happy:token', token);

@@ -2,23 +2,20 @@ import React, { ChangeEvent, FormEvent, useEffect, useState } from "react"
 import { Map, Marker, TileLayer } from 'react-leaflet'
 import L from 'leaflet'
 
-import { FiPlus, FiX } from "react-icons/fi"
+import { FiPlus, FiX, FiXCircle, FiCheck } from "react-icons/fi"
 
 import '../styles/pages/create-orphanage.css'
 import mapIcon from "../utils/mapIcon"
 import api from "../services/api"
-import { useHistory, useLocation, useParams } from "react-router-dom"
+import { useHistory, useParams } from "react-router-dom"
 import WrapperContent from "../components/WrapperContent"
 
 import { useAuth } from '../contexts/auth'
 import { toast } from "react-toastify"
 
-interface ILocation {
-  id: number
-}
-
 interface OrphanageParams {
   id: string;
+  tela: string;
 }
 
 interface IOrphanage {
@@ -39,12 +36,11 @@ interface IOrphanage {
 
 export default function EditOrphanage() {
 
-  const { push } = useHistory()
+
+  const history = useHistory()
   const params = useParams<OrphanageParams>();
   
   const [position, setPosition] = useState({ lat: 0, lng: 0 })
-
-  const location = useLocation<ILocation>()
   const { user } = useAuth();
 
   const [name, setName] = useState('')
@@ -56,16 +52,18 @@ export default function EditOrphanage() {
   const [images, setImages] = useState<File[]>([])
   const [previewImages, setPreviewImages] = useState<string[]>([])
   const [permission, setpermission] = useState(true)
-    
+  const [tela, settela] = useState("edit")
+
   const [orphanage, setOrphanage] = useState<IOrphanage>()
 
   useEffect(() => {
     if(!params) {
-      return push('/approvedlist')
+      return history.push('/pendinglist')
     }
 
-    api.get<IOrphanage>(`orphanages/${params.id}`).then(res => {
+    settela( window.location.href.indexOf("verify") !== -1 ? "verify" : "edit" )
 
+    api.get<IOrphanage>(`orphanages/${params.id}`).then(res => {
       setOrphanage(res.data)
       setName(res.data.name)
       setAbout(res.data.about)
@@ -74,14 +72,14 @@ export default function EditOrphanage() {
       setOpenOnWeekends(res.data.open_on_weekends)
       setOpeningHours(res.data.opening_hours)
       setPreviewImages(res.data.images.map(e => e.url))
-
+      
       setPosition({
         lat: res.data.latitude,
         lng: res.data.longitude
       })
 
-    })
-  }, [])
+    }).catch(error => toast.error('Ocorreu um erro ao recuperar o orfanato'));
+  }, [params, history])
   
   const handleMapClick = (event: L.LeafletMouseEvent) => {
     setPosition({
@@ -92,44 +90,44 @@ export default function EditOrphanage() {
 
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault()
-    const { lat: latitude, lng: longitude } = position
-  
- 
-    try {
 
-      await api.put('orphanages', {name, latitude, longitude, about, whatsapp,
-      instructions, opening_hours, open_on_weekends, permission}).then(response => {
+    let msg_1 = tela === "verify" ? (permission ? 'favoritado': 'recusado') : "editado" ;
+    let msg_2 = tela === "verify" ? (permission ? 'favoritar': 'recusar') : "editar" ;
+    const { lat: latitude, lng: longitude } = position;
+
+    try {    
+      await api.put(`orphanages/update/${params.id}`, 
+        (tela === "verify" ?
+        {user_id : user.id, name, latitude, longitude, about, whatsapp,
+        instructions, opening_hours, open_on_weekends, permission}
+        :
+        {user_id : user.id, name, latitude, longitude, about, whatsapp,
+          instructions, opening_hours, open_on_weekends}
+        )
+      ).then(response => {
 
         const { id } = response.data;
-
         const dataimg =  new FormData();
     
-        images.forEach(image => {
-          dataimg.append('images', image);
-        });
+        images.forEach(image => { dataimg.append('images', image); });
     
-   
-        api.put(`orphanages/${id}`, dataimg);
+        api.put(`orphanages/images/${id}`, dataimg);
     
-        toast.success(
-          'Orfanato favoritado com sucesso!',
-        );
-    
-        push('/app');   
+        toast.success(`O orfanato foi ${msg_1} com sucesso`);
+        (tela === "verify" && !permission ? history.push('/approvedlist') : history.push('/pendinglist') );   
 
-      }).catch(error => toast.error('Ocorreu um erro ao fazer o cadastro'));
+      }).catch(error => toast.error(`Ocorreu um erro ao ${msg_2} o cadastro`));
 
     } catch(e) {
-      toast.error('Ocorreu um erro ao favoritar o orfanato');
+      toast.error(`Ocorreu um erro ao ${msg_2} o orfanato`);
     }
   }
-
     
   function handleSelectImages(event: ChangeEvent<HTMLInputElement>) {
     if (!event.target.files) return; 
     const selectedImages = Array.from(event.target.files)
     setImages(selectedImages);
-    selectedImages.map(image => {
+    selectedImages.forEach(image => {
       const imageurl =  URL.createObjectURL(image)
       setPreviewImages(previewImages => ([...previewImages, imageurl]))
     });
@@ -142,14 +140,14 @@ export default function EditOrphanage() {
     setPreviewImages(newPreviewImages)
   }
 
-  
   if(!orphanage) {
     return <h1>Carregando</h1>
   }
 
   return (
     <WrapperContent id="page-create-orphanage" className="page-content-left" 
-      container="detail">
+      container="verify">
+
       <main>
         <form onSubmit={handleSubmit} className="create-orphanage-form">
           <fieldset>
@@ -198,11 +196,11 @@ export default function EditOrphanage() {
 
                 {previewImages.map((img, index) => {
                   return (
-                    <div className="img-container">
+                    <div  key={index} className="img-container">
                       <div className="close" onClick={() => removeImage(index)}>
                         <FiX size={20} color='black' />
                       </div>
-                      <img src={img} key={index} alt={name}></img>
+                      <img src={img}  alt={name}></img>
                     </div>
                   )
                 })}
@@ -242,11 +240,29 @@ export default function EditOrphanage() {
             </div>
           </fieldset>
 
-          <button className="confirm-button" type="submit">
-            Confirmar
-          </button>
+          { tela === "verify" ?  
+           (
+            <div className="verify-orphanage-buttons">
+              <button onClick={() => setpermission(true)}  className="verify-confirm-button" type="submit">
+                  <FiCheck  size={20} color='white' /> Favoritar
+              </button>
+              <button onClick={() => setpermission(false)}   className="verify-deny-button" type="submit">
+                  <FiXCircle size={20} color='white' /> Recusar
+              </button>
+            </div>
+           ) :
+
+           (
+              <button className="confirm-button" type="submit">
+                Confirmar
+              </button>
+           )
+        
+        
+          }
         </form>
       </main>
     </WrapperContent>
   );
 }
+

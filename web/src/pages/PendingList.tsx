@@ -4,14 +4,8 @@ import '../styles/pages/dashboard.css'
 import noPending from '../images/nopending.svg'
 import Orphanages from "../components/Orphanages"
 import WrapperContent from "../components/WrapperContent"
-import { useParams } from "react-router-dom"
 import api from "../services/api"
 import { toast } from "react-toastify"
-
-interface PendingParams {
-  id: string;
-}
-
 
 interface IOrphanages {
   id: number
@@ -21,8 +15,6 @@ interface IOrphanages {
 }
 
 const PendingList = () => {
-
-  const params = useParams<PendingParams>();
 
   const [orphanages, setOrphanages] = useState<IOrphanages[]>([])
 
@@ -41,7 +33,7 @@ const PendingList = () => {
   const renderOrphanages = () => {
       return orphanages.map(orphanage => {
           return (
-              <Orphanages {...orphanage} />
+              <Orphanages key={orphanage.id} {...orphanage} />
           )
       })
   }

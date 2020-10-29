@@ -26,21 +26,10 @@ const SelectUF: React.FC<SelectUFsProps> = ({ options, ...rest}) =>
     const [ufs, setUfs] = useState<SelectProps[]>([])
 
     useEffect(() => {
-
-    //   axios.get<IBGEUFProps[]>('https://nominatim.openstreetmap.org/search?addressdetails=1&city=Campinas&state=S%C3%A3o%20Paulo&country=Brasil&format=json&limit=1')
-    //   .then(response => {
-
-    //     console.log(response.data)
-    //     // response.data.map(uf => { 
-    //     //     setUfs(ufs => ([...ufs, { id: uf.sigla, value: uf.nome + "(" + uf.sigla + ")" } ]))
-    //     // } )
-    // })
-    
-
-      
+     
         axios.get<IBGEUFProps[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
           .then(response => {
-            response.data.map(uf => { 
+            response.data.forEach(uf => { 
                 setUfs(ufs => ([...ufs, { id: uf.sigla, value: uf.nome} ]))
             } )
         }).catch(error => toast.error('Ocorreu um erro ao recuperar dados do IBGE'));

@@ -10,9 +10,10 @@ interface SuccessProps {
     button: string
     navigate: string
     className: string
+    onClick?(): any
 }
 
-const Success: React.FC<SuccessProps> = ({ title, description, button, navigate, className}) => {
+const Success: React.FC<SuccessProps> = ({ title, description, button, navigate, className, onClick}) => {
 
     const history = useHistory()
 
@@ -21,7 +22,7 @@ const Success: React.FC<SuccessProps> = ({ title, description, button, navigate,
             <div className="success-aside">
                 <h1 className="success-title z1">{title}</h1>
                 <p className="success-description z1">{description}</p>
-                <button onClick={() => history.push(navigate)} 
+                <button onClick={ () => title === "Excluir!" ?  onClick : history.push(navigate) } 
                   className={className === "success-container" ? "success-button z1" : "delete-button z1"} >{button}</button>
             </div>
             <img className="z1" src={className === "success-container" ? successIcon : deleteIcon} alt="sucesso"/>
