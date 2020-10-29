@@ -41,7 +41,7 @@ export default function EditOrphanage() {
   const params = useParams<OrphanageParams>();
   
   const [position, setPosition] = useState({ lat: 0, lng: 0 })
-  const { user } = useAuth();
+  const { user, signOut } = useAuth();
 
   const [name, setName] = useState('')
   const [about, setAbout] = useState('')
@@ -63,6 +63,15 @@ export default function EditOrphanage() {
 
     settela( window.location.href.indexOf("verify") !== -1 ? "verify" : "edit" )
 
+    let token = localStorage.getItem('@happy:token');
+    if (!token) {
+      token = sessionStorage.getItem('@happy:token');
+    }
+
+    if (!token) history.push('/loginerror')
+    
+    api.defaults.headers.authorization = `Bearer ${token}`
+
     api.get<IOrphanage>(`orphanages/${params.id}`).then(res => {
       setOrphanage(res.data)
       setName(res.data.name)
@@ -78,7 +87,18 @@ export default function EditOrphanage() {
         lng: res.data.longitude
       })
 
-    }).catch(error => toast.error('Ocorreu um erro ao recuperar o orfanato'));
+    }).catch((err) => {
+
+          if (err.response.status === 401) {
+              toast.error('Você não tem permissão para acessar essa página.')
+              history.push('/loginerror')
+          } else if (err.response.status === 404) {
+              toast.error('O conteúdo desta página não foi encontrado.')
+              history.push('/')
+          }else  {
+              toast.error('Ocorreu um erro ao recuperar o orfanato.')
+          }
+      });
   }, [params, history])
   
   const handleMapClick = (event: L.LeafletMouseEvent) => {

@@ -1,6 +1,8 @@
 import React from 'react'
 import { useHistory, useParams } from 'react-router-dom'
+import { toast } from 'react-toastify'
 import Success from '../components/Success'
+import { useAuth } from '../contexts/auth'
 import api from '../services/api'
 
 
@@ -11,16 +13,34 @@ interface OrphanageParams {
 
 const DeleteSuccess = () => {
 
-    const { push } = useHistory()
+    const history = useHistory()
     const params = useParams<OrphanageParams>();
-  
+    
     const handleDelete = async () => {
         try {
 
-            console.log("handleDelete")
-            await api.delete(`/orphanages/delete/${params.id}`)
+            let token = localStorage.getItem('@happy:token');
+            if (!token) {
+              token = sessionStorage.getItem('@happy:token');
+            }
+
+            if (!token) history.push('/loginerror')
+            
+            api.defaults.headers.authorization = `Bearer ${token}`
+            await api.delete(`/orphanages/delete/${params.id}`).catch((err) => {
+
+                if (err.response.status === 401) {
+                    toast.error('Você não tem permissão para acessar essa página.')
+                    history.push('/loginerror')
+                } else if (err.response.status === 404) {
+                    toast.error('O conteúdo desta página não foi encontrado.')
+                    history.push('/')
+                }else  {
+                    toast.error('Ocorreu um erro ao recuperar os orfanatos.')
+                }
+            });
     
-            push('/app')
+            history.push('/app')
         } catch {
             alert('Erro ao deletar')
         }

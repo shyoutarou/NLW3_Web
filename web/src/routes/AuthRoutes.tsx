@@ -13,6 +13,7 @@ import OrphanagesMap from '../pages/OrphanagesMap';
 import CreateOrphanage from '../pages/CreateOrphanage';
 import Orphanage from '../pages/Orphanage';
 import CreateOrphanageSuccess from '../pages/CreateOrphanageSuccess';
+import NotFound from '../pages/NotFound';
 
 const AuthRoutes: React.FC = () => (
     <BrowserRouter>
@@ -28,7 +29,7 @@ const AuthRoutes: React.FC = () => (
         <Route path="/app" component={OrphanagesMap} />
         <Route path="/orphanages/create" component={CreateOrphanage} />
         <Route path='/orphanage-success' exact component={CreateOrphanageSuccess}  />
-        <Route path="/orphanages/:id" component={Orphanage} />        
+        <Route path="/orphanages/:id" component={Orphanage} />     
         <Redirect to="/" />
       </Switch>
     </BrowserRouter>

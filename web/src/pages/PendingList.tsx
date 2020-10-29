@@ -6,6 +6,8 @@ import Orphanages from "../components/Orphanages"
 import WrapperContent from "../components/WrapperContent"
 import api from "../services/api"
 import { toast } from "react-toastify"
+import { useAuth } from "../contexts/auth"
+import { useHistory } from "react-router-dom"
 
 interface IOrphanages {
   id: number
@@ -16,16 +18,40 @@ interface IOrphanages {
 
 const PendingList = () => {
 
+  const history = useHistory();
+
   const [orphanages, setOrphanages] = useState<IOrphanages[]>([])
 
+  
   useEffect(() => {
+
+      let token = localStorage.getItem('@happy:token');
+      if (!token) {
+        token = sessionStorage.getItem('@happy:token');
+      }
+
+      if (!token) history.push('/loginerror')
+
+      api.defaults.headers.authorization = `Bearer ${token}`
 
       try {
            api.get<IOrphanages[]>('/indexPending/0').then(res => {
             setOrphanages(res.data)
-        }).catch(error => toast.error('Ocorreu um erro ao recuperar o orfanato'));
+        }).catch((err) => {
+
+            if (err.response.status === 401) {
+                toast.error('Você não tem permissão para acessar essa página.')
+                history.push('/loginerror')
+            } else if (err.response.status === 404) {
+                toast.error('O conteúdo desta página não foi encontrado.')
+                history.push('/')
+            }else  {
+                toast.error('Ocorreu um erro ao recuperar o orfanato.')
+            }
+        });
+
       } catch(e) {
-        toast.error('Email inexistente!');
+        toast.error('Ocorreu um erro ao recuperar o orfanato.');
       } 
       
   }, [])

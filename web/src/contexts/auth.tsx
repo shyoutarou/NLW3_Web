@@ -27,15 +27,15 @@ const AuthContext = createContext<AuthContextData>({} as AuthContextData);
 const AuthProvider: React.FunctionComponent = ({ children }) => {
 
     const [tokenUser, settokenUser] = useState<AuthState>(() => {
-        let token = localStorage.getItem('@proffy:token');
+        let token = localStorage.getItem('@happy:token');
         if (!token) {
-          token = sessionStorage.getItem('@proffy:token');
+          token = sessionStorage.getItem('@happy:token');
         }
     
-        let Storageduser = localStorage.getItem('@proffy:user');
+        let Storageduser = localStorage.getItem('@happy:user');
     
         if (!Storageduser) {
-            Storageduser = sessionStorage.getItem('@proffy:user');
+            Storageduser = sessionStorage.getItem('@happy:user');
         }
     
         if (token && Storageduser) {
@@ -73,8 +73,10 @@ const AuthProvider: React.FunctionComponent = ({ children }) => {
     }
 
     function signOut() {
-        localStorage.clear();
-        sessionStorage.clear();
+        localStorage.removeItem('@happy:token');
+        localStorage.removeItem('@happy:user');
+        sessionStorage.removeItem('@happy:token');
+        sessionStorage.removeItem('@happy:user');
         settokenUser({} as AuthState);
     }
 

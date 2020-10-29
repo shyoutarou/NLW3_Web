@@ -17,7 +17,6 @@ const Sidebar: React.FunctionComponent<SidebarProps> = ({ logout, pending }) => 
   const { signOut } = useAuth();
   
   const handleLogout = () => {
-      localStorage.clear()
       signOut();  
       push('/login')
   }
