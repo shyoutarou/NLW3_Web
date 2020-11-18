@@ -6,7 +6,6 @@ import Orphanages from "../components/Orphanages"
 import WrapperContent from "../components/WrapperContent"
 import api from "../services/api"
 import { toast } from "react-toastify"
-import { useAuth } from "../contexts/auth"
 import { useHistory } from "react-router-dom"
 
 interface IOrphanages {
@@ -34,27 +33,31 @@ const PendingList = () => {
 
       api.defaults.headers.authorization = `Bearer ${token}`
 
-      try {
-           api.get<IOrphanages[]>('/indexPending/0').then(res => {
-            setOrphanages(res.data)
-        }).catch((err) => {
+      async function HandleloadOrphanages() {
+        try {
+                return await api.get<IOrphanages[]>('/indexPending/0').then(res => {
+                setOrphanages(res.data)
+            }).catch((err) => {
 
-            if (err.response.status === 401) {
-                toast.error('Você não tem permissão para acessar essa página.')
-                history.push('/loginerror')
-            } else if (err.response.status === 404) {
-                toast.error('O conteúdo desta página não foi encontrado.')
-                history.push('/')
-            }else  {
-                toast.error('Ocorreu um erro ao recuperar o orfanato.')
-            }
-        });
+                if (err.response.status === 401) {
+                    toast.error('Você não tem permissão para acessar essa página.')
+                    history.push('/loginerror')
+                } else if (err.response.status === 404) {
+                    toast.error('O conteúdo desta página não foi encontrado.')
+                    history.push('/')
+                }else  {
+                    toast.error('Ocorreu um erro ao recuperar o orfanato.')
+                }
+            });
 
-      } catch(e) {
-        toast.error('Ocorreu um erro ao recuperar o orfanato.');
-      } 
+          } catch(e) {
+            toast.error('Ocorreu um erro ao recuperar o orfanato.');
+          } 
+      }
       
-  }, [])
+      HandleloadOrphanages();
+      
+  }, [history])
  
   const renderOrphanages = () => {
       return orphanages.map(orphanage => {

@@ -8,19 +8,18 @@ import { FiArrowLeft } from 'react-icons/fi'
 
 import '../styles/pages/forgotpassword.css'
 
+
 const ForgotPassword = () => {
 
     const [email, setEmail] = useState<string>('ric@shik.com')
-
     const history = useHistory();
 
     const handleReset = async (e: FormEvent) => {
         e.preventDefault()
     
         try {
-            await api.post('/forgotPassword', {
-                email
-            }).catch(error => toast.error('Ocorreu um erro ao enviar e-mail'));
+            await api.post('/forgotPassword', { email })
+                     .catch(error => toast.error('Ocorreu um erro ao enviar e-mail'));
     
             history.push('/forgot-password-success')
         } catch(e) {

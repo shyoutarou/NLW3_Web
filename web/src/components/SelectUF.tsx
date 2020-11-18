@@ -27,12 +27,23 @@ const SelectUF: React.FC<SelectUFsProps> = ({ options, ...rest}) =>
 
     useEffect(() => {
      
-        axios.get<IBGEUFProps[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
+      
+        ufs.length = 0;
+
+        setUfs([...ufs, { id: "0", value: "Selecione uma estado" } ])
+
+        async function HandleloadStates() {
+          return await axios.get<IBGEUFProps[]>('https://servicodados.ibge.gov.br/api/v1/localidades/estados')
           .then(response => {
             response.data.forEach(uf => { 
                 setUfs(ufs => ([...ufs, { id: uf.sigla, value: uf.nome} ]))
-            } )
-        }).catch(error => toast.error('Ocorreu um erro ao recuperar dados do IBGE'));
+              } )
+          }).catch(error => toast.error('Ocorreu um erro ao recuperar dados do IBGE'));
+        }
+        
+        HandleloadStates();
+
+
       }, [])
            
     return (

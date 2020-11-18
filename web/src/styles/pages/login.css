@@ -133,8 +133,11 @@
     transition: 0.5s;
 }
 
-.login-footer{
-    display: none;
+.login-footer {
+    margin-top: 2rem;
+    display: flex !important;
+    justify-content: space-between;
+    width: 100%;
 }
 
 .login-footer .signup{
@@ -176,14 +179,6 @@
 
     .login-bar-container {
         width: 90%;
-    }
-
-    
-    .login-footer {
-        margin-top: 2rem;
-        display: flex !important;
-        justify-content: space-between;
-        width: 100%;
     }
 }
   

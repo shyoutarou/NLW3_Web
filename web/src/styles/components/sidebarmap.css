@@ -1,46 +1,22 @@
-#page-map aside {
-    width: 440px;
-    background: linear-gradient(329.54deg, #29B6D1 0%, #00C7C7 100%);
-    padding: 80px;
-
+.sidebarmap-container {
+    min-height: 50vh;
     display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+    background: var(--color-primary);
 }
 
-#page-map aside h2 {
+.sidebarmap-banner {
+    padding: 25px;
+    text-align: center;
+    background: var(--color-primary);
+    z-index: 10000;
+}
+
+.sidebarmap-banner img {
+    min-width: 75px;
+}
+
+.sidebarmap-logo {
     font-size: 40px;
-    font-weight: 800;
-    line-height: 42px;
-}
-
-#page-map aside p {
-    line-height: 28px;
-    margin-top: 24px;
-}
-
-#page-map aside footer {
-    display: flex;
-    flex-direction: column;
-
-    line-height: 24px;
-}
-
-#page-map aside footer strong {
-    font-weight: 800;
-}
-
-#page-map aside footer span {
-    font-weight: lighter;
-}
-
-.sidebarmap-bar-container {
-    margin: 0 auto;
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    color: var(--color-text-int-primary);
-    padding: 1.6rem 0;
 }
 
 .sidebarmap-bar-container a {
@@ -73,11 +49,55 @@ a.sidebarmap-back svg {
     color: var(--color-button-text)!important;
   }
 
+.sidebarmap-location {
+    display: flex;
+    flex-direction: column;
+
+    line-height: 24px;
+}
+
+.sidebarmap-location strong {
+    font-weight: 800;
+}
+
+.sidebarmap-location span {
+    font-weight: lighter;
+}
 
 @media (min-width: 900px) {
 
-    .sidebarmap-bar-container {
-        width: 90%;
+    .sidebarmap-container {
+        max-width: 300px;
+        margin: 0 auto;
     }
-}
-  
+
+    .sidebarmap-banner {
+        padding: 80px;
+        min-height: 100vh;
+        background-color: #15C3D6;
+        display: flex;
+        flex-direction: column;
+        text-align: initial;
+    }
+
+    .sidebarmap-logo {
+        font-size: 70px;
+    }
+
+    .sidebarmap-banner img {
+        width: 75px;
+    }
+
+    .sidebarmap-banner h2{
+        line-height: 55px;
+        font-size: 40px;
+        margin-bottom: 10px;
+    }
+} 
+
+
+
+
+
+
+

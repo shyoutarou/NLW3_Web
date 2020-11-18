@@ -5,7 +5,8 @@
 }
 
 .created-orphanage-container {
-    width: 544px;
+    min-width: 320px;
+    width: 45%;
     height: 309px;
     border-radius: 16px;
     margin-right: 30px;
@@ -21,7 +22,7 @@
 }
 
 .created-orphanage-options {
-    width: 544px;
+    min-width: 320px;
     height: 82px;
     border-bottom-left-radius: 16px;
     border-bottom-right-radius: 16px;
@@ -51,3 +52,4 @@
 .created-orphanage-name {
     padding-left: 22px;
 }
+

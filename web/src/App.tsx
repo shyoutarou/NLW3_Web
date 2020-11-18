@@ -6,14 +6,17 @@ import 'react-toastify/dist/ReactToastify.css';
 
 import Routes from './routes';
 import { AuthProvider } from './contexts/auth';
+import { LocalProvider } from './contexts/local';
 
 function App() {
   return (
     <>
       <ToastContainer />
-      <AuthProvider>
-        <Routes />
-      </AuthProvider>
+      <LocalProvider>
+        <AuthProvider>
+          <Routes />
+        </AuthProvider>
+      </LocalProvider>
     </>    
   );
 }

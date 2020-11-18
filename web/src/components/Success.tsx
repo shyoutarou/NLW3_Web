@@ -17,7 +17,7 @@ interface SuccessProps {
 
 const Success: React.FC<SuccessProps> = ({ title, description, button, navigate, className, onClick}) => {
 
-    const history = useHistory()
+    const { push, goBack } = useHistory()
     const { signOut } = useAuth();
 
     const handleLogout = () => {
@@ -25,9 +25,9 @@ const Success: React.FC<SuccessProps> = ({ title, description, button, navigate,
         if(title === "Não Autorizado!")
         {
             signOut();  
-            history.push('/login')
+            push('/login')
         } 
-        else alert("history.push(navigate)")
+        else push(navigate)
     }
   
     return (
@@ -35,9 +35,16 @@ const Success: React.FC<SuccessProps> = ({ title, description, button, navigate,
             <div className="success-aside">
                 <h1 className="success-title z1">{title}</h1>
                 <p className="success-description z1">{description}</p>
-                <button 
-                    onClick={title === "Excluir!" ? onClick : handleLogout }
-                    className={className === "success-container" ? "success-button z1" : "delete-button z1"} >{button}</button>
+                <div className="success-buttons">
+                    <button 
+                        onClick={title === "Excluir!" ? onClick : handleLogout }
+                        className={className === "success-container" ? "success-button z1" : "delete-button z1"} >{button}</button>
+                        {title === "Excluir!" && (
+                            <button type="button" className="cancel-button z1" onClick={goBack}>
+                            Cancelar
+                            </button>
+                        ) }
+                </div>
             </div>
             <img className="z1" src={className === "success-container" ? successIcon : deleteIcon} alt="sucesso"/>
         </div>

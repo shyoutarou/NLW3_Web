@@ -3,6 +3,7 @@ import SidebarForm from './SidebarForm';
 import Sidebar from './Sidebar';
 import SidebarMap from './SidebarMap';
 import '../styles/components/wrappercontent.css';
+import SidebarLanding from './SidebarLanding';
 
 interface WrapperProps {
   id: string,
@@ -14,10 +15,10 @@ interface WrapperProps {
 const WrapperContent: FC<WrapperProps> = ({ children, id, className, container, logout }) => {
   return (
     <div id={id} className={className}>
-      {container === 'form'? <SidebarForm />  : container === 'map'? 
-        <SidebarMap/> : container === 'pending'?  
-        <Sidebar logout={logout} pending /> : 
-        <Sidebar logout={logout}/> }
+      { container === 'landing'? <SidebarLanding />  : 
+        container === 'form'? <SidebarForm />  : container === 'map'? 
+        <SidebarMap/> : 
+        <Sidebar logout={logout} container={container} /> }
       {children}
     </div>
   )

@@ -1,34 +1,48 @@
 #page-content {
-    display: grid;
-    grid-template-rows: 40vh 1fr;
-    width: 100vw;
-    height: 100vh;
-    color: var(--color-text-in-primary);
     background: var(--color-primary);
   }
+
+#page-content-map, #page-content-form {
+    background: var(--color-input-background);
+}
   
 @media (min-width: 900px) {
     #page-content {
-        width: 100vw;
-        height: 100vh;
         display: grid;
-        grid-template-rows: 1fr !important;
         grid-template-columns: repeat(2, 1fr);
     }
 
-    #page-content.page-content-right {
+    #page-content-map {
+        display: grid;
+        grid-template-columns: fit-content(30%);
+    }
+
+    #page-content-form {
+        display: grid;
+        grid-template-columns: fit-content(20%);
+    }
+
+    #page-content.page-content-right,
+    #page-content-map.page-content-right,
+    #page-content-form.page-content-right {
     grid-template-areas: 'top bottom';
     }
 
-    #page-content.page-content-left {
+    #page-content.page-content-left,
+    #page-content-map.page-content-left,
+    #page-content-form.page-content-left {
     grid-template-areas: 'bottom top';
     }
 
-    #page-content > div:nth-child(1) {
+    #page-content > div:nth-child(1),
+    #page-content-map > div:nth-child(1),
+    #page-content-form > div:nth-child(1) {
     grid-area: top;
     }
 
-    #page-content > div:nth-child(2) {
+    #page-content > div:nth-child(2),
+    #page-content-map > div:nth-child(2),
+    #page-content-form > div:nth-child(2) {
     grid-area: bottom;
     }
 }

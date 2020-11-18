@@ -2,7 +2,6 @@ import React from 'react'
 import { useHistory, useParams } from 'react-router-dom'
 import { toast } from 'react-toastify'
 import Success from '../components/Success'
-import { useAuth } from '../contexts/auth'
 import api from '../services/api'
 
 

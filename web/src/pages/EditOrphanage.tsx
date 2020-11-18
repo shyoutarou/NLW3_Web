@@ -41,7 +41,7 @@ export default function EditOrphanage() {
   const params = useParams<OrphanageParams>();
   
   const [position, setPosition] = useState({ lat: 0, lng: 0 })
-  const { user, signOut } = useAuth();
+  const { user } = useAuth();
 
   const [name, setName] = useState('')
   const [about, setAbout] = useState('')
@@ -58,7 +58,8 @@ export default function EditOrphanage() {
 
   useEffect(() => {
     if(!params) {
-      return history.push('/pendinglist')
+
+      return history.push(tela === "verify" ? '/pendinglist' : '/approvedlist')
     }
 
     settela( window.location.href.indexOf("verify") !== -1 ? "verify" : "edit" )
@@ -71,36 +72,45 @@ export default function EditOrphanage() {
     if (!token) history.push('/loginerror')
     
     api.defaults.headers.authorization = `Bearer ${token}`
-
-    api.get<IOrphanage>(`orphanages/${params.id}`).then(res => {
-      setOrphanage(res.data)
-      setName(res.data.name)
-      setAbout(res.data.about)
-      setWhatsApp(res.data.whatsapp)
-      setInstructions(res.data.instructions)
-      setOpenOnWeekends(res.data.open_on_weekends)
-      setOpeningHours(res.data.opening_hours)
-      setPreviewImages(res.data.images.map(e => e.url))
-      
-      setPosition({
-        lat: res.data.latitude,
-        lng: res.data.longitude
-      })
-
-    }).catch((err) => {
-
-          if (err.response.status === 401) {
-              toast.error('Você não tem permissão para acessar essa página.')
-              history.push('/loginerror')
-          } else if (err.response.status === 404) {
-              toast.error('O conteúdo desta página não foi encontrado.')
-              history.push('/')
-          }else  {
-              toast.error('Ocorreu um erro ao recuperar o orfanato.')
-          }
-      });
+    HandleloadOrphanage();
+    
   }, [params, history])
   
+  async function HandleloadOrphanage() {
+      try {
+          return await  api.get<IOrphanage>(`orphanages/${params.id}`).then(res => {
+            setOrphanage(res.data)
+            setName(res.data.name)
+            setAbout(res.data.about)
+            setWhatsApp(res.data.whatsapp)
+            setInstructions(res.data.instructions)
+            setOpenOnWeekends(res.data.open_on_weekends)
+            setOpeningHours(res.data.opening_hours)
+            setPreviewImages(res.data.images.map(e => e.url))
+            
+            setPosition({
+              lat: res.data.latitude,
+              lng: res.data.longitude
+            })
+      
+          }).catch((err) => {
+      
+                if (err.response.status === 401) {
+                    toast.error('Você não tem permissão para acessar essa página.')
+                    history.push('/loginerror')
+                } else if (err.response.status === 404) {
+                    toast.error('O conteúdo desta página não foi encontrado.')
+                    history.push('/')
+                }else  {
+                    toast.error('Ocorreu um erro ao recuperar o orfanato.')
+                }
+            });
+
+      } catch(e) {
+        toast.error('Ocorreu um erro ao recuperar o orfanato');
+      }
+  }
+
   const handleMapClick = (event: L.LeafletMouseEvent) => {
     setPosition({
       lat: event.latlng.lat,
@@ -130,11 +140,13 @@ export default function EditOrphanage() {
         const dataimg =  new FormData();
     
         images.forEach(image => { dataimg.append('images', image); });
-    
-        api.put(`orphanages/images/${id}`, dataimg);
+
+        api.put(`/orphanages/deleteimages/${params.id}`, {previewImages});
+        api.put(`orphanages/images/${id}`, dataimg );
     
         toast.success(`O orfanato foi ${msg_1} com sucesso`);
-        (tela === "verify" && !permission ? history.push('/approvedlist') : history.push('/pendinglist') );   
+
+        history.push(tela === "verify" ? '/pendinglist' : '/approvedlist')
 
       }).catch(error => toast.error(`Ocorreu um erro ao ${msg_2} o cadastro`));
 
@@ -165,9 +177,8 @@ export default function EditOrphanage() {
   }
 
   return (
-    <WrapperContent id="page-create-orphanage" className="page-content-left" 
-      container="verify">
-
+    <WrapperContent id="page-content-form" className="page-content-right" container="verify">
+    <div className="page-create">    
       <main>
         <form onSubmit={handleSubmit} className="create-orphanage-form">
           <fieldset>
@@ -277,11 +288,10 @@ export default function EditOrphanage() {
                 Confirmar
               </button>
            )
-        
-        
           }
         </form>
       </main>
+      </div>   
     </WrapperContent>
   );
 }

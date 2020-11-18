@@ -6,9 +6,9 @@ export default function Default() {
 return (
     <>
        <div className="default-wrapper">
-       <a className="default-button" href="/" target="_blank">  
-           Home
-       </a>    
+            <a className="default-button" href="/" target="_blank">  
+                Home
+            </a>    
        </div>
     </>
     )

@@ -1,24 +1,78 @@
-aside.app-sidebar {
-    position: fixed;
-    height: 100%;
-    padding: 32px 24px;
-    background: linear-gradient(329.54deg, #15B6D6 0%, #15D6D6 100%);
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: center;
-  }
-  
-  aside.app-sidebar img {
-    width: 48px;
-  }
+.sidebar-container  {
+  min-height: 50vh;
+  display: flex;
+  background: var(--color-primary);
+}
 
-  aside.app-sidebar footer
-  {
-    margin-bottom: 30px;
-  }
+.sidebar-banner {
+  padding: 25px;
+  text-align: center;
+  background: var(--color-primary);
+  z-index: 10000;
+}
 
-  aside.app-sidebar footer a,
+.sidebar-banner h1
+{
+   font-size: 50px;
+   margin-bottom: 15px;
+}
+
+.sidebar-logo {
+  font-size: 40px;
+}
+
+.sidebar-container a {
+  height: 3.2rem;
+  transition: opacity 0.2s;
+}
+
+.sidebar-container a:hover {
+  background: #17D6EB;
+}
+
+.sidebar-back {
+  position: initial;
+  width: 48px;
+  height: 48px;
+  border: 0;
+  background: #12AFCB;
+  min-height: 48px;
+  border-radius: 16px;
+  background: #12AFCB;
+  transition: background-color 0.2s;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  cursor: pointer;
+  align-self: flex-end;
+  margin-left: auto;
+}
+
+a.sidebar-back svg {
+  color: var(--color-button-text)!important;
+}
+
+.sidebar-location {
+  display: flex;
+  flex-direction: column;
+
+  line-height: 24px;
+}
+
+.sidebar-location strong {
+  font-weight: 800;
+}
+
+.sidebar-location span {
+  font-weight: lighter;
+}
+
+.sidebar-options {
+  position: absolute;
+  top: 20px;
+}
+
+aside.app-sidebar footer a,
   aside.app-sidebar button,
   .optins-button,
   .optins-button-active {
@@ -68,10 +122,53 @@ aside.app-sidebar {
 
 .point {
     background-color: #FFD666;
-width: 1px;
-height: 1px;
-border-radius: 20px;
-padding: 4px;
-border: solid;
-border-width: 1px;
-}
+    width: 1px;
+    height: 1px;
+    border-radius: 20px;
+    padding: 4px;
+    border: solid;
+    border-width: 1px;
+} 
+
+@media (min-width: 900px) {
+
+  .sidebar-container {
+      max-width: 300px;
+      margin: 0 auto;
+  }
+
+  .sidebar-banner {
+      min-height: 100vh;
+      background-color: #15C3D6;
+      display: flex;
+      flex-direction: column;
+      text-align: initial;
+      position:fixed
+  }
+
+  .sidebar-logo {
+      font-size: 70px;
+  }
+
+  .sidebar-options {
+    position: initial;
+    margin: 0;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    -ms-transform: translate(-50%, -50%);
+    transform: translate(-50%, -50%);
+  }
+
+  .sidebar-back {
+    position: absolute;
+    bottom: 15%;
+    right: 30%;
+  }
+
+  .sidebar-location
+  {
+      display: none;
+  }
+} 
+

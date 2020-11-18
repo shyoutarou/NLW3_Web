@@ -64,7 +64,7 @@ const Login = () => {
             onSubmit={(event) => handleSignIn(event)}
             >
              <div className="login-bar-container">
-                <Link className="login-back" to="/landing">
+                <Link className="login-back" to="/">
                     <FiArrowLeft color="#15C3D6" size={24} />
                 </Link>   
             </div>

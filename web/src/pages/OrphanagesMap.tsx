@@ -34,20 +34,26 @@ function OrphanagesMap() {
           })
       }
 
-      try {
-            api.get('orphanages').then(response => {
-              setOrphanages(response.data);
-            }).catch(error => toast.error('Ocorreu um erro ao recuperar os orfanatos'));
-      } catch(e) {
-  
-        toast.error('Ocorreu um erro ao recuperar os orfanatos');
+      async function HandleloadOrphanages() {
+          try {
+                  return await  api.get('orphanages').then(response => {
+
+                    console.log( "setOrphanages"   )
+                  setOrphanages(response.data);
+                }).catch(error => toast.error('Ocorreu um erro IN ao recuperar os orfanatos'));
+          } catch(e) {
+
+            toast.error('Ocorreu um erro OUT ao recuperar os orfanatos');
+          }
       }
+      
+      HandleloadOrphanages();
 
     }, []);
 
     return (
-
-        <WrapperContent id="page-map" className="page-content-left" container="map">
+      <WrapperContent id="page-content-map" className="page-content-right" container="map">
+        <div className="page-map">
             <Map center={[mapPosition.lat, mapPosition.lng]} 
                  zoom={15}
                  style={{ width: '100%', height: '100%' }}>
@@ -78,7 +84,8 @@ function OrphanagesMap() {
             <Link to="/orphanages/create" className="create-orphanage">
                 <FiPlus size={32} color="#FFF" />
             </Link>
-        </WrapperContent>      
+        </div>            
+      </WrapperContent>      
     );
 }
 

@@ -53,8 +53,6 @@ export default function CreateOrphanage() {
       const imageurl =  URL.createObjectURL(image)
       setPreviewImages(previewImages => ([...previewImages, imageurl]))
     });
-
-    console.log(previewImages)
   }
 
   const removeImage = (removeIndex: number) => {
@@ -64,6 +62,7 @@ export default function CreateOrphanage() {
     setPreviewImages(newPreviewImages)
   }
 
+  
   async function handleSubmit(event: FormEvent) {
 
     event.preventDefault();
@@ -90,9 +89,8 @@ export default function CreateOrphanage() {
   }
   
   return (
-    <WrapperContent id="page-create-orphanage" 
-        className="page-content-left" 
-        container="detail">
+    <WrapperContent id="page-content-form" className="page-content-right" container="create">
+    <div className="page-create">    
       <main>
         <form onSubmit={handleSubmit}  className="create-orphanage-form">
           <fieldset>
@@ -180,7 +178,7 @@ export default function CreateOrphanage() {
             </div>
 
             <div className="input-block">
-              <label htmlFor="opening_hours">Horário de funcinamento</label>
+              <label htmlFor="opening_hours">Horário de funcionamento</label>
               <input
                 id="opening_hours"
                 value={opening_hours}
@@ -211,6 +209,7 @@ export default function CreateOrphanage() {
           </button>
         </form>
       </main>
+      </div>   
     </WrapperContent>
   );
 }

@@ -15,7 +15,6 @@
     flex: 1;
     min-height: 100vh;
     padding: 40px;
-    padding-left: 150px;
 }
 
 .dashboard-title {
@@ -32,6 +31,8 @@
 }
 
 .dashboard-orphanages {
+    /* border: solid 4px red; */
+    width: 100%;
     display: flex;
     justify-content: center;
 }
@@ -48,3 +49,11 @@
 .no-pending p {
     margin-top: 15px;
 }
+
+@media (min-width: 900px) {
+
+    .dashboard-main {
+        padding-left: 150px;
+    }
+} 
+

@@ -16,24 +16,15 @@ function ResetPassword() {
     const history = useHistory();
     const { id, token } : any = useParams();
 
-    function handleResetSucess(e: FormEvent) {
+    async function handleResetSucess(e: FormEvent) {
         e.preventDefault();
     
         try {
-            if (isAble() && password === confirmPassword) {
-                       
-                api.post(`resetPassword/${id}`, {
-                  password,
-                  token,
-                }).then(() => {
-                    
-                      history.push('/reset-password-success')
-                }).catch((error) =>{
-                    toast.error('Ocorreu um erro ao fazer a alteração');
-                })
-            } else {
-            toast.error("Suas senhas não batem.")
-            }
+            if (isAble() && password === confirmPassword) {                    
+                await api.post(`resetPassword/${id}`, { password, token })
+                   .then(() => { history.push('/reset-password-success') })
+                   .catch((error) =>{ toast.error('Ocorreu um erro ao fazer a alteração'); })
+            } else { toast.error("Suas senhas não batem.") }
         } catch (err) {
             toast.error('Ocorreu um erro ao recuperar senha');
         }              

@@ -1,70 +1,23 @@
-#page-landing {
-    width: 100vw;
-    height: 100vh;
-    background: linear-gradient(329.54deg, #29B6D1 0%, #00C7C7 100%);
-
-    display: flex;
-    justify-content: center;
-    align-items: center;
+.page-landing {
+    height: 60vh;
+    /* border: 3px solid green; */
 }
 
-#page-landing .content-wrapper {
-    position: relative;
-
-    width: 90%;
-    max-width: 1100px;
-
+.page-landing .content-wrapper {
+    background: url('../../images/landing.svg') no-repeat center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    /* border: 2px solid red; */
     height: 90%;
-    max-height: 680px;
-
-    display: flex;
-    align-items: flex-start;
-    flex-direction: column;
-    justify-content: space-between;
-
-    background: url('../../images/landing.svg') no-repeat 80% center;
 }
 
-#page-landing .content-wrapper main {
-    max-width: 350px;
-}
-
-#page-landing .content-wrapper main h1 {
-    font-size: 76px;
-    font-weight: 900;
-    line-height: 70px;
-}
-
-#page-landing .content-wrapper main p {
-    max-width: 350px;
-    margin-top: 40px;
-    font-size: 24px;
-    line-height: 34px;
-}
-
-.content-wrapper .location {
-    font-size: 24px;
-    /* line-height: 34px;
-    display: flex;
-    flex-direction: column;
-    text-align: left;
-    position: absolute;
-    top: 0;
-    left: 300px; */
-}
-
-.content-wrapper .location strong {
-    font-weight: 800;
-}
-
-.content-wrapper .enter-app {
+.content-wrapper .enter-app, .content-wrapper .enter-app-active  {
     position: absolute;
     right: 0;
     bottom: 0;
 
     width: 80px;
     height: 80px;
-    background-color: #ffd666;
     border-radius: 30px;
 
     display: flex;
@@ -72,19 +25,28 @@
     justify-content: center;
 
     transition: background-color 0.2s;
+
+    background: var(--color-line-in-white);
+    color: var(--color-text-complement);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.content-wrapper .enter-app-active {
+    background-color: #ffd666;
+    color: var(--color-text-complement);
+    cursor: pointer;
+    pointer-events: auto;
 }
 
 .content-wrapper .enter-app:hover {
     background-color: #96FEFF;
 }
 
-
-.restrict-access {
+.restrict-access, .restrict-access-active {
     width: 222px;
     height: 56px;
-    background: #12D4E0;
     position: absolute;
-    top: 0;
     right: 0;
     border-radius: 16px;
     font-size: 16px;
@@ -92,12 +54,46 @@
     justify-content: center;
     align-items: center;
     transition: 0.5s;
-    cursor: pointer;
-    color: var(--color-text-in-primary);
     font: 600 18px Nunito, sans-serif;
     text-decoration: none;
+    background: var(--color-line-in-white);
+    color: var(--color-text-complement);
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+.restrict-access-active {
+    background: #12D4E0;
+    color: var(--color-text-in-primary);
+    cursor: pointer;
+    pointer-events: auto;
 }
 
 .restrict-access:hover {
     background-color: #96FEFF;
 }
+
+@media (min-width: 900px) {
+
+    .page-landing {
+        height: 100vh;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    
+    .page-landing .content-wrapper {
+        position: absolute;
+        margin-right: 80px;
+        width: 50%;
+        height: 95%;
+    }
+
+    .restrict-access, .restrict-access-active {
+        position: absolute;
+        top: 0;
+        width: 195px;
+    }
+} 
+

@@ -22,18 +22,29 @@ interface SelectUFsProps extends SelectHTMLAttributes<HTMLSelectElement>  {
     }>;
   }
 
+
+
+
 const SelectCity: React.FC<SelectUFsProps> = ({ options, selectedUf, ...rest}) => 
 {  
     const [cities, setCities] = useState<SelectProps[]>([])
      
-    useEffect(() => {
+    useEffect(()  =>  {
 
-    axios.get<IBGEUFProps[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`)
-        .then(response => {
-            response.data.forEach(city => { 
-                setCities(cities => ([...cities, { id: city.nome, value: city.nome } ]))
-            })
-        }).catch(error => toast.error('Ocorreu um erro ao recuperar dados do IBGE'));
+        cities.length = 0;
+
+        setCities([...cities, { id: "0", value: "Selecione uma cidade" } ])
+
+        async function HandleloadCities() {
+            return await axios.get<IBGEUFProps[]>(`https://servicodados.ibge.gov.br/api/v1/localidades/estados/${selectedUf}/municipios`)
+            .then(response => {
+                response.data.forEach(city => { 
+                    setCities(cities => ([...cities, { id: city.nome, value: city.nome } ]))
+                })
+            }).catch(error => toast.error('Ocorreu um erro ao recuperar dados do IBGE'));
+        }
+        
+        HandleloadCities();
 
     }, [selectedUf])
 

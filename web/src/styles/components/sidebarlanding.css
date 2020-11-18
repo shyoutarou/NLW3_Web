@@ -1,0 +1,49 @@
+.sidebarlanding-container {
+    /* min-height: 50vh; */
+    display: flex;
+}
+
+.sidebarlanding-banner {
+    padding: 25px;
+    text-align: center;
+    width: 100%;
+}
+
+.sidebarlanding-banner img {
+    min-width: 210px;
+}
+
+.sidebarlanding-logo {
+    font-size: 40px;
+}
+
+@media (min-width: 900px) {
+
+    .sidebarlanding-container {
+        padding: 90px;
+        margin: 0 auto;
+    }
+
+    .sidebarlanding-banner {
+        min-height: 100vh;
+        max-width: 370px;
+        background-color: #15C3D6;
+        display: flex;
+        flex-direction: column;
+        text-align: initial;
+    }
+
+    .sidebarlanding-logo {
+        font-size: 70px;
+    }
+
+    .sidebarlanding-banner img {
+        width: 110px;
+    }
+
+    .sidebarlanding-banner h2{
+        line-height: 55px;
+        font-size: 60px;
+        margin-bottom: 10px;
+    }
+} 
